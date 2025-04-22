@@ -65,4 +65,46 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-} */
+}
+*/
+@media print {
+  body * {
+    visibility: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  #print-area,
+  #print-area * {
+    visibility: visible;
+  }
+  #print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 297mm;
+    height: 210mm;
+  }
+
+  /* .no-print {
+    display: none !important;
+  } */
+
+  .no-break {
+    page-break-inside: avoid !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+}
+
+:root {
+  font-size: 12px;
+}
+
+body {
+  margin: 0;
+}
