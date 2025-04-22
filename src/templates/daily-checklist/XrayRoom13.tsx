@@ -1,19 +1,11 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  Paper,
-  Box,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Table, TableBody, TableContainer, Paper, Box } from '@mui/material';
 import DailyCheckHeader from '../../Organisms/DailyCheck/DailyCheckHeader';
 import DailyCheckFooter from '../../Organisms/DailyCheck/DailyCheckFooter';
-import DailyCheckPrintButton from '../../Organisms/DailyCheck/DailyCheckPrintButton';
 import DailyCheckRemarks from '../../Organisms/DailyCheck/DailyCheckRemarks';
 import DailyCheckListItems from '../../Organisms/DailyCheck/DailyCheckListItems';
 import { DeviceInspection, InspectionCategory } from '../../types';
 import DailyCheckDateRow from '../../Organisms/DailyCheck/DailyCheckDateRow';
+import { FC } from 'react';
 
 const inspectionData: DeviceInspection = {
   deviceId: '13-room',
@@ -89,60 +81,10 @@ const inspectionData: DeviceInspection = {
   ],
 };
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  border: '1px solid black',
-  padding: '0px',
-  textAlign: 'center',
-  verticalAlign: 'middle',
-  boxSizing: 'border-box',
-}));
-
-const HeaderTableCell = styled(StyledTableCell)({
-  fontWeight: 'bold',
-  backgroundColor: '#f0f0f0',
-});
-
-const daysInMonth: number = 30;
-const year: number = 2025;
-const month: number = 4;
-
-const getDayInfo = (year: number, month: number, day: number) => {
-  const date = new Date(year, month - 1, day);
-  const dayOfWeek = date.getDay();
-  return {
-    label: day,
-    weekday: ['日', '月', '火', '水', '木', '金', '土'][dayOfWeek],
-    dayOfWeek,
-  };
-};
-
-const shouldRenderCell = (day: number, frequency: string): boolean => {
-  const { dayOfWeek } = getDayInfo(year, month, day);
-  switch (frequency) {
-    case 'daily_weekdays':
-      return dayOfWeek >= 1 && dayOfWeek <= 5; // 月〜金を表示
-    case 'weekly_friday':
-      return dayOfWeek === 5; // 金曜日のみ
-    case 'monthly_first':
-      return day === 1; // 1日
-    case 'monthly_last':
-      return day === daysInMonth; // 最終日
-    case 'flexible':
-      return true;
-    default:
-      return false;
-  }
-};
-
-const hasWhiteCellInSection = (
-  section: InspectionCategory,
-  day: number
-): boolean => {
-  return section.items.some((item) => {
-    if (item.frequency === 'flexible') return false;
-    return shouldRenderCell(day, item.frequency);
-  });
-};
+const RemarksContents: string[] = [
+  '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
+  '※ CBCT検査申込書(6ヶ月保管)ファイルに1ヵ月分の申込書を綴じ、6ヶ月を超えた申込書を廃棄してください。',
+];
 
 // maxWidth: '297mm',
 // maxHeight: '210mm',
@@ -185,7 +127,35 @@ console.log('項目一行', checkItemHight);
 console.log('備考', printRemarksHeight);
 console.log('フッター', printFooterHeight);
 
-const XrayRoom13 = () => {
+type XrayRoom13Props = {
+  daysInMonth: number;
+  year: number;
+  month: number;
+  getDayInfo: (
+    year: number,
+    month: number,
+    day: number
+  ) => {
+    label: number;
+    weekday: string;
+    dayOfWeek: number;
+  };
+  hasWhiteCellInSection: (section: InspectionCategory, day: number) => boolean;
+  shouldRenderCell: (day: number, frequency: string) => boolean;
+  StyledTableCell: React.ElementType;
+  HeaderTableCell: React.ElementType;
+};
+
+const XrayRoom13: FC<XrayRoom13Props> = ({
+  daysInMonth,
+  year,
+  month,
+  getDayInfo,
+  hasWhiteCellInSection,
+  shouldRenderCell,
+  StyledTableCell,
+  HeaderTableCell,
+}) => {
   return (
     <>
       <Box
@@ -215,7 +185,10 @@ const XrayRoom13 = () => {
           }}
         >
           {/* ヘッダー */}
-          <DailyCheckHeader printHeaderHeight={printHeaderHeight} />
+          <DailyCheckHeader
+            printHeaderHeight={printHeaderHeight}
+            inspectionData={inspectionData}
+          />
           <TableContainer>
             <Table size='small'>
               {/* 日にち */}
@@ -247,6 +220,7 @@ const XrayRoom13 = () => {
                   StyledTableCell={StyledTableCell}
                   printRemarksHeight={printRemarksHeight}
                   daysInMonth={daysInMonth}
+                  RemarksContents={RemarksContents}
                 />
               </TableBody>
             </Table>
@@ -255,7 +229,6 @@ const XrayRoom13 = () => {
           <DailyCheckFooter printFooterHeight={printFooterHeight} />
         </Paper>
       </Box>
-      <DailyCheckPrintButton />
     </>
   );
 };

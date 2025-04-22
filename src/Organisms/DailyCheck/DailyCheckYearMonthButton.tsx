@@ -39,10 +39,26 @@ const DailyCheckYearMonthButton: React.FC<YearMonthButtonProps> = ({
   };
 
   return (
-    <div className='no-print' style={{ height: '50px', width: '50%' }}>
-      <Stack direction='row' spacing={2} sx={{ m: '70px' }}>
+    <div
+      className='no-print'
+      style={{
+        height: '50px',
+        width: '100%',
+        margin: '50px auto',
+      }}
+    >
+      <Stack
+        direction='row'
+        spacing={2}
+        sx={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         {/* 年 */}
-        <FormControl required sx={{ m: 1, minWidth: 120 }}>
+        <FormControl required sx={{ m: 1, minWidth: 200 }}>
           <InputLabel id='demo-simple-select-required-label'>Year</InputLabel>
           <Select
             labelId='demo-simple-select-required-label'
@@ -61,7 +77,7 @@ const DailyCheckYearMonthButton: React.FC<YearMonthButtonProps> = ({
         </FormControl>
 
         {/* 月 */}
-        <FormControl required sx={{ m: 1, minWidth: 120 }}>
+        <FormControl required sx={{ m: 1, minWidth: 200 }}>
           <InputLabel id='demo-simple-select-required-label'>Month</InputLabel>
           <Select
             labelId='demo-simple-select-required-label'
@@ -80,7 +96,7 @@ const DailyCheckYearMonthButton: React.FC<YearMonthButtonProps> = ({
         </FormControl>
 
         {/* 撮影室 */}
-        <FormControl required sx={{ m: 1, minWidth: 120 }}>
+        <FormControl required sx={{ m: 1, minWidth: 200 }}>
           <InputLabel id='demo-simple-select-required-label'>撮影室</InputLabel>
           <Select
             labelId='demo-simple-select-required-label'

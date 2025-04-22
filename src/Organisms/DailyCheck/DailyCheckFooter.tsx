@@ -14,7 +14,6 @@ const DailyCheckFooter: React.FC<DailyCheckFooterProps> = ({
         justifyContent: 'flex-end',
         height: `${printFooterHeight}mm`,
         boxSizing: 'border-box',
-        border: 2,
       }}
     >
       <Typography sx={{ fontSize: '10px', pr: '2px', pt: '2px' }}>

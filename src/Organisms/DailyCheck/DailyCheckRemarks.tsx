@@ -1,16 +1,18 @@
-import { TableRow, Typography } from '@mui/material';
+import { Box, TableCell, TableRow, Typography } from '@mui/material';
 import { FC } from 'react';
 
 type RemarksProps = {
   StyledTableCell: React.ElementType;
   printRemarksHeight: number;
   daysInMonth: number;
+  RemarksContents: string[];
 };
 
 const DailyCheckRemarks: FC<RemarksProps> = ({
   StyledTableCell,
   printRemarksHeight,
   daysInMonth,
+  RemarksContents,
 }) => {
   return (
     <>
@@ -29,17 +31,33 @@ const DailyCheckRemarks: FC<RemarksProps> = ({
           備考
         </StyledTableCell>
 
-        <StyledTableCell
+        <TableCell
           colSpan={2 + daysInMonth}
-          sx={{ border: '3px solid black' }}
+          sx={{
+            border: '3px solid black',
+            textAlign: 'left',
+            alignItems: 'end',
+            // justifyContent: 'end',
+            height: 'auto',
+            boxSizing: 'border-box',
+            verticalAlign: 'bottom',
+            px: 1,
+            py: '4px',
+          }}
         >
-          <Typography>
-            ※手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入
-          </Typography>
-          <Typography>
-            ※CBCT検査申込書(6ヶ月保管)ファイルに1ヵ月分の申込書を綴じ、6ヶ月を超えた申込書を廃棄してください。
-          </Typography>
-        </StyledTableCell>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-end',
+              height: '100%',
+            }}
+          >
+            {RemarksContents.map((remarksContent, index) => (
+              <Typography key={index}>{remarksContent}</Typography>
+            ))}
+          </Box>
+        </TableCell>
       </TableRow>
     </>
   );

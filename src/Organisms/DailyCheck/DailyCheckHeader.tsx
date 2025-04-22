@@ -1,11 +1,14 @@
 import { Box, Grid, Stack, Typography } from '@mui/material';
+import { DeviceInspection } from '../../types';
 
 interface DailyCheckHeaderProps {
   printHeaderHeight: number;
+  inspectionData: DeviceInspection;
 }
 
 const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
   printHeaderHeight,
+  inspectionData,
 }) => {
   return (
     //  上段 printHeader
@@ -33,14 +36,15 @@ const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center',
+            alignItems: 'end',
             width: '100%',
-            px: '40px',
+            px: 4,
+            pb: 1,
           }}
         >
-          <Grid>13番撮影室</Grid>
-          <Grid>2025年1月</Grid>
-          <Grid>aaa病院 aaaaaaaa</Grid>
+          <Typography variant='h4'>{inspectionData.deviceName}</Typography>
+          <Typography variant='h4'>2025年1月</Typography>
+          <Typography variant='h4'>aaa病院 aaaaaaaa</Typography>
         </Grid>
       </Box>
       <Box
