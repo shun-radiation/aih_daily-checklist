@@ -9,28 +9,30 @@ import { Stack } from '@mui/material';
 type YearMonthButtonProps = {
   displayRoom: string;
   setDisplayRoom: React.Dispatch<React.SetStateAction<string>>;
+  dailyChecklistYear: number;
+  setDailyChecklistYear: React.Dispatch<React.SetStateAction<number>>;
+  dailyChecklistMonth: number;
+  setDailyChecklistMonth: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const DailyCheckYearMonthButton: React.FC<YearMonthButtonProps> = ({
   displayRoom,
   setDisplayRoom,
+  dailyChecklistYear,
+  setDailyChecklistYear,
+  dailyChecklistMonth,
+  setDailyChecklistMonth,
 }) => {
-  const [dailyChecklistYear, setDailyChecklistYear] =
-    React.useState<string>('2025');
-  const [dailyChecklistMonth, setDailyChecklistMonth] =
-    React.useState<string>('1');
-  // const [selectRoom, setSelectRoom] = React.useState<string>('13番撮影室');
-
-  const yearList = ['2025', '2026', '2027', '2028', '2029', '2030'];
-  const monthList = Array.from({ length: 12 }, (_, i) => String(i + 1));
+  const yearList = [2025, 2026, 2027, 2028, 2029, 2030];
+  const monthList = Array.from({ length: 12 }, (_, i) => Number(i + 1));
   const roomList = ['13番撮影室', '15番撮影室'];
 
   const handleYearChange = (event: SelectChangeEvent) => {
-    setDailyChecklistYear(event.target.value);
+    setDailyChecklistYear(Number(event.target.value));
   };
 
   const handleMonthChange = (event: SelectChangeEvent) => {
-    setDailyChecklistMonth(event.target.value);
+    setDailyChecklistMonth(Number(event.target.value));
   };
 
   const handleSelectRoomChange = (event: SelectChangeEvent) => {
@@ -63,7 +65,7 @@ const DailyCheckYearMonthButton: React.FC<YearMonthButtonProps> = ({
           <Select
             labelId='demo-simple-select-required-label'
             id='demo-simple-select-required'
-            value={dailyChecklistYear}
+            value={String(dailyChecklistYear)}
             label='Year *'
             onChange={handleYearChange}
           >
@@ -82,7 +84,7 @@ const DailyCheckYearMonthButton: React.FC<YearMonthButtonProps> = ({
           <Select
             labelId='demo-simple-select-required-label'
             id='demo-simple-select-required'
-            value={dailyChecklistMonth}
+            value={String(dailyChecklistMonth)}
             label='Month *'
             onChange={handleMonthChange}
           >

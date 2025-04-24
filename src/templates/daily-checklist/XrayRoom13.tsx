@@ -118,19 +118,20 @@ const checkItemHight: number = printChecklistHeight / checkItemLength;
 
 // なんとなく25pxぐらい
 // const checkItemMaxHight: string = '25px';
-console.log(checkItemLength);
-console.log('全体', printHeightMM);
-console.log('ヘッダー', printHeaderHeight);
-console.log('日にち', printDateHeight);
-console.log('リスト全体', printChecklistHeight);
-console.log('項目一行', checkItemHight);
-console.log('備考', printRemarksHeight);
-console.log('フッター', printFooterHeight);
+
+// console.log(checkItemLength);
+// console.log('全体', printHeightMM);
+// console.log('ヘッダー', printHeaderHeight);
+// console.log('日にち', printDateHeight);
+// console.log('リスト全体', printChecklistHeight);
+// console.log('項目一行', checkItemHight);
+// console.log('備考', printRemarksHeight);
+// console.log('フッター', printFooterHeight);
 
 type XrayRoom13Props = {
+  dailyChecklistYear: number;
+  dailyChecklistMonth: number;
   daysInMonth: number;
-  year: number;
-  month: number;
   getDayInfo: (
     year: number,
     month: number,
@@ -147,9 +148,9 @@ type XrayRoom13Props = {
 };
 
 const XrayRoom13: FC<XrayRoom13Props> = ({
+  dailyChecklistYear,
+  dailyChecklistMonth,
   daysInMonth,
-  year,
-  month,
   getDayInfo,
   hasWhiteCellInSection,
   shouldRenderCell,
@@ -188,6 +189,8 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
           <DailyCheckHeader
             printHeaderHeight={printHeaderHeight}
             inspectionData={inspectionData}
+            dailyChecklistYear={dailyChecklistYear}
+            dailyChecklistMonth={dailyChecklistMonth}
           />
           <TableContainer>
             <Table size='small'>
@@ -197,8 +200,8 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
                 HeaderTableCell={HeaderTableCell}
                 printDateHeight={printDateHeight}
                 daysInMonth={daysInMonth}
-                year={year}
-                month={month}
+                dailyChecklistYear={dailyChecklistYear}
+                dailyChecklistMonth={dailyChecklistMonth}
                 getDayInfo={getDayInfo}
               />
               <TableBody>
@@ -208,8 +211,8 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
                   StyledTableCell={StyledTableCell}
                   checkItemHight={checkItemHight}
                   daysInMonth={daysInMonth}
-                  year={year}
-                  month={month}
+                  dailyChecklistYear={dailyChecklistYear}
+                  dailyChecklistMonth={dailyChecklistMonth}
                   getDayInfo={getDayInfo}
                   hasWhiteCellInSection={hasWhiteCellInSection}
                   shouldRenderCell={shouldRenderCell}

@@ -6,8 +6,8 @@ type DateRowProps = {
   HeaderTableCell: React.ElementType;
   printDateHeight: number;
   daysInMonth: number;
-  year: number;
-  month: number;
+  dailyChecklistYear: number;
+  dailyChecklistMonth: number;
   getDayInfo: (
     year: number,
     month: number,
@@ -24,8 +24,8 @@ const DailyCheckDateRow: FC<DateRowProps> = ({
   HeaderTableCell,
   printDateHeight,
   daysInMonth,
-  year,
-  month,
+  dailyChecklistYear,
+  dailyChecklistMonth,
   getDayInfo,
 }) => {
   return (
@@ -44,7 +44,11 @@ const DailyCheckDateRow: FC<DateRowProps> = ({
           点検項目
         </HeaderTableCell>
         {[...Array(daysInMonth)].map((_, i) => {
-          const dayInfo = getDayInfo(year, month, i + 1);
+          const dayInfo = getDayInfo(
+            dailyChecklistYear,
+            dailyChecklistMonth,
+            i + 1
+          );
           return (
             dayInfo.weekday !== '日' &&
             dayInfo.weekday !== '土' && (

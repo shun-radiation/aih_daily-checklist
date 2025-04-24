@@ -4,11 +4,15 @@ import { DeviceInspection } from '../../types';
 interface DailyCheckHeaderProps {
   printHeaderHeight: number;
   inspectionData: DeviceInspection;
+  dailyChecklistYear: number;
+  dailyChecklistMonth: number;
 }
 
 const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
   printHeaderHeight,
   inspectionData,
+  dailyChecklistYear,
+  dailyChecklistMonth,
 }) => {
   return (
     //  上段 printHeader
@@ -42,8 +46,8 @@ const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
             pb: 1,
           }}
         >
-          <Typography variant='h4'>{inspectionData.deviceName}</Typography>
-          <Typography variant='h4'>2025年1月</Typography>
+          <Typography variant='h4'>{`保守点検表 (${inspectionData.deviceName})`}</Typography>
+          <Typography variant='h4'>{`${dailyChecklistYear}年${dailyChecklistMonth}月`}</Typography>
           <Typography variant='h4'>aaa病院 aaaaaaaa</Typography>
         </Grid>
       </Box>

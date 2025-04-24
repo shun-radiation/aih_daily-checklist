@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 // import { Outlet } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 import { Box, styled, TableCell } from '@mui/material';
@@ -9,6 +9,10 @@ import { InspectionCategory } from '../types';
 import DailyCheckPrintButton from '../Organisms/DailyCheck/DailyCheckPrintButton';
 
 const DailyChecklist = () => {
+  const [dailyChecklistYear, setDailyChecklistYear] =
+    React.useState<number>(2025);
+  const [dailyChecklistMonth, setDailyChecklistMonth] =
+    React.useState<number>(1);
   const [displayRoom, setDisplayRoom] = useState('13番撮影室');
 
   const StyledTableCell = styled(TableCell)(() => ({
@@ -24,9 +28,17 @@ const DailyChecklist = () => {
     backgroundColor: '#f0f0f0',
   });
 
-  const daysInMonth: number = 30;
-  const year: number = 2025;
-  const month: number = 4;
+  const getMonthlyLastDay = (year: number, month: number) => {
+    // {year}年、{month-1}月、0日 ⇨ {year}年、{month}月、最終日となり、.getDate()で日にちを取得
+    return new Date(year, month, 0).getDate();
+  };
+
+  // 指定した年月の日数を取得
+  const daysInMonth = getMonthlyLastDay(
+    dailyChecklistYear,
+    dailyChecklistMonth - 1 + 1
+  );
+  console.log(daysInMonth);
 
   const getDayInfo = (year: number, month: number, day: number) => {
     const date = new Date(year, month - 1, day);
@@ -37,9 +49,14 @@ const DailyChecklist = () => {
       dayOfWeek,
     };
   };
+  // console.log(getDayInfo(2025, 4, 24).weekday);
 
   const shouldRenderCell = (day: number, frequency: string): boolean => {
-    const { dayOfWeek } = getDayInfo(year, month, day);
+    const { dayOfWeek } = getDayInfo(
+      dailyChecklistYear,
+      dailyChecklistMonth,
+      day
+    );
     switch (frequency) {
       case 'daily_weekdays':
         return dayOfWeek >= 1 && dayOfWeek <= 5; // 月〜金を表示
@@ -72,26 +89,26 @@ const DailyChecklist = () => {
         return (
           <XrayRoom13
             daysInMonth={daysInMonth}
-            year={year}
-            month={month}
             getDayInfo={getDayInfo}
             hasWhiteCellInSection={hasWhiteCellInSection}
             shouldRenderCell={shouldRenderCell}
             StyledTableCell={StyledTableCell}
             HeaderTableCell={HeaderTableCell}
+            dailyChecklistYear={dailyChecklistYear}
+            dailyChecklistMonth={dailyChecklistMonth}
           />
         );
       case '15番撮影室':
         return (
           <XrayRoom15
             daysInMonth={daysInMonth}
-            year={year}
-            month={month}
             getDayInfo={getDayInfo}
             hasWhiteCellInSection={hasWhiteCellInSection}
             shouldRenderCell={shouldRenderCell}
             StyledTableCell={StyledTableCell}
             HeaderTableCell={HeaderTableCell}
+            dailyChecklistYear={dailyChecklistYear}
+            dailyChecklistMonth={dailyChecklistMonth}
           />
         );
     }
@@ -103,6 +120,10 @@ const DailyChecklist = () => {
         <DailyCheckYearMonthButton
           displayRoom={displayRoom}
           setDisplayRoom={setDisplayRoom}
+          dailyChecklistYear={dailyChecklistYear}
+          setDailyChecklistYear={setDailyChecklistYear}
+          dailyChecklistMonth={dailyChecklistMonth}
+          setDailyChecklistMonth={setDailyChecklistMonth}
         />
 
         {renderDisplayRoom()}

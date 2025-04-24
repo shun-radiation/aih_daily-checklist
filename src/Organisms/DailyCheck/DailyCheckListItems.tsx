@@ -7,8 +7,8 @@ type ListItemsProps = {
   StyledTableCell: React.ElementType;
   checkItemHight: number;
   daysInMonth: number;
-  year: number;
-  month: number;
+  dailyChecklistYear: number;
+  dailyChecklistMonth: number;
   getDayInfo: (
     year: number,
     month: number,
@@ -27,8 +27,8 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
   StyledTableCell,
   checkItemHight,
   daysInMonth,
-  year,
-  month,
+  dailyChecklistYear,
+  dailyChecklistMonth,
   getDayInfo,
   hasWhiteCellInSection,
   shouldRenderCell,
@@ -73,7 +73,11 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
                 {item.label}
               </StyledTableCell>
               {[...Array(daysInMonth)].map((_, dayIndex) => {
-                const dayInfo = getDayInfo(year, month, dayIndex + 1);
+                const dayInfo = getDayInfo(
+                  dailyChecklistYear,
+                  dailyChecklistMonth,
+                  dayIndex + 1
+                );
                 return (
                   dayInfo.weekday !== '日' &&
                   dayInfo.weekday !== '土' && (
