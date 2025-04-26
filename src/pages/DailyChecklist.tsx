@@ -5,7 +5,6 @@ import { Box, styled, TableCell } from '@mui/material';
 import DailyCheckYearMonthButton from '../Organisms/DailyCheck/DailyCheckYearMonthButton';
 import XrayRoom13 from '../templates/daily-checklist/XrayRoom13';
 import XrayRoom15 from '../templates/daily-checklist/XrayRoom15';
-import { InspectionCategory } from '../types';
 import DailyCheckPrintButton from '../Organisms/DailyCheck/DailyCheckPrintButton';
 
 const DailyChecklist = () => {
@@ -23,11 +22,6 @@ const DailyChecklist = () => {
     boxSizing: 'border-box',
   }));
 
-  const HeaderTableCell = styled(StyledTableCell)({
-    fontWeight: 'bold',
-    backgroundColor: '#f0f0f0',
-  });
-
   const getMonthlyLastDay = (year: number, month: number) => {
     // {year}年、{month-1}月、0日 ⇨ {year}年、{month}月、最終日となり、.getDate()で日にちを取得
     return new Date(year, month, 0).getDate();
@@ -38,7 +32,7 @@ const DailyChecklist = () => {
     dailyChecklistYear,
     dailyChecklistMonth - 1 + 1
   );
-  console.log(daysInMonth);
+  // console.log(daysInMonth);
 
   const getDayInfo = (year: number, month: number, day: number) => {
     const date = new Date(year, month - 1, day);
@@ -51,64 +45,26 @@ const DailyChecklist = () => {
   };
   // console.log(getDayInfo(2025, 4, 24).weekday);
 
-  const shouldRenderCell = (day: number, frequency: string): boolean => {
-    const { dayOfWeek } = getDayInfo(
-      dailyChecklistYear,
-      dailyChecklistMonth,
-      day
-    );
-    switch (frequency) {
-      case 'daily_weekdays':
-        return dayOfWeek >= 1 && dayOfWeek <= 5; // 月〜金を表示
-      case 'weekly_friday':
-        return dayOfWeek === 5; // 金曜日のみ
-      case 'monthly_first':
-        return day === 1; // 1日
-      case 'monthly_last':
-        return day === daysInMonth; // 最終日
-      case 'flexible':
-        return true;
-      default:
-        return false;
-    }
-  };
-
-  const hasWhiteCellInSection = (
-    section: InspectionCategory,
-    day: number
-  ): boolean => {
-    return section.items.some((item) => {
-      if (item.frequency === 'flexible') return false;
-      return shouldRenderCell(day, item.frequency);
-    });
-  };
-
   const renderDisplayRoom = () => {
     switch (displayRoom) {
       case '13番撮影室':
         return (
           <XrayRoom13
-            daysInMonth={daysInMonth}
-            getDayInfo={getDayInfo}
-            hasWhiteCellInSection={hasWhiteCellInSection}
-            shouldRenderCell={shouldRenderCell}
             StyledTableCell={StyledTableCell}
-            HeaderTableCell={HeaderTableCell}
             dailyChecklistYear={dailyChecklistYear}
             dailyChecklistMonth={dailyChecklistMonth}
+            daysInMonth={daysInMonth}
+            getDayInfo={getDayInfo}
           />
         );
       case '15番撮影室':
         return (
           <XrayRoom15
-            daysInMonth={daysInMonth}
-            getDayInfo={getDayInfo}
-            hasWhiteCellInSection={hasWhiteCellInSection}
-            shouldRenderCell={shouldRenderCell}
             StyledTableCell={StyledTableCell}
-            HeaderTableCell={HeaderTableCell}
             dailyChecklistYear={dailyChecklistYear}
             dailyChecklistMonth={dailyChecklistMonth}
+            daysInMonth={daysInMonth}
+            getDayInfo={getDayInfo}
           />
         );
     }

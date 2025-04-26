@@ -3,7 +3,7 @@ import DailyCheckHeader from '../../Organisms/DailyCheck/DailyCheckHeader';
 import DailyCheckFooter from '../../Organisms/DailyCheck/DailyCheckFooter';
 import DailyCheckRemarks from '../../Organisms/DailyCheck/DailyCheckRemarks';
 import DailyCheckListItems from '../../Organisms/DailyCheck/DailyCheckListItems';
-import { DeviceInspection, InspectionCategory } from '../../types';
+import { DeviceInspection } from '../../types/types';
 import DailyCheckDateRow from '../../Organisms/DailyCheck/DailyCheckDateRow';
 import { FC } from 'react';
 
@@ -46,7 +46,7 @@ const inspectionData: DeviceInspection = {
         },
         { label: '補助具・備品の紛失 チェック', frequency: 'daily_weekdays' },
         {
-          label: 'CBCT申込書サインチェック(2か所)',
+          label: 'CBCT申込書サインチェック(2か所) ※',
           frequency: 'daily_weekdays',
         },
         { label: '実施者サイン', frequency: 'flexible' },
@@ -55,19 +55,19 @@ const inspectionData: DeviceInspection = {
     {
       category: '週間点検',
       items: [
-        { label: '撮影室の清掃', frequency: 'weekly_friday' },
-        { label: '寝具・衣類の交換', frequency: 'weekly_friday' },
+        { label: '撮影室の清掃', frequency: 'last-WeekdayOfWeek' },
+        { label: '寝具・衣類の交換', frequency: 'last-WeekdayOfWeek' },
         {
           label: 'コンソールモニター及び周辺の清掃',
-          frequency: 'weekly_friday',
+          frequency: 'last-WeekdayOfWeek',
         },
-        { label: '手洗い場の清掃', frequency: 'weekly_friday' },
+        { label: '手洗い場の清掃', frequency: 'last-WeekdayOfWeek' },
         {
-          label: '手指消毒液③⑤⑥の残量・使用本数確認',
+          label: '手指消毒液③⑤⑥の残量・使用本数確認 (月初) ※',
           frequency: 'monthly_first',
         },
-        { label: '時計の時間合わせ', frequency: 'monthly_last' },
-        { label: 'CBCT検査申込書の整理', frequency: 'monthly_last' },
+        { label: '時計の時間合わせ (月末)', frequency: 'monthly_last' },
+        { label: 'CBCT検査申込書の整理 (月末)', frequency: 'monthly_last' },
         {
           label: '実施者サイン',
           frequency: 'flexible',
@@ -82,9 +82,12 @@ const inspectionData: DeviceInspection = {
 };
 
 const RemarksContents: string[] = [
-  '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
   '※ CBCT検査申込書(6ヶ月保管)ファイルに1ヵ月分の申込書を綴じ、6ヶ月を超えた申込書を廃棄してください。',
+  '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
 ];
+
+// 最終改訂日:yyyy/MM/dd の形式で統一
+const finalRevision: string = '2025/01/01';
 
 // maxWidth: '297mm',
 // maxHeight: '210mm',
@@ -131,6 +134,7 @@ const checkItemHight: number = printChecklistHeight / checkItemLength;
 type XrayRoom13Props = {
   dailyChecklistYear: number;
   dailyChecklistMonth: number;
+  StyledTableCell: React.ElementType;
   daysInMonth: number;
   getDayInfo: (
     year: number,
@@ -141,21 +145,14 @@ type XrayRoom13Props = {
     weekday: string;
     dayOfWeek: number;
   };
-  hasWhiteCellInSection: (section: InspectionCategory, day: number) => boolean;
-  shouldRenderCell: (day: number, frequency: string) => boolean;
-  StyledTableCell: React.ElementType;
-  HeaderTableCell: React.ElementType;
 };
 
 const XrayRoom13: FC<XrayRoom13Props> = ({
   dailyChecklistYear,
   dailyChecklistMonth,
+  StyledTableCell,
   daysInMonth,
   getDayInfo,
-  hasWhiteCellInSection,
-  shouldRenderCell,
-  StyledTableCell,
-  HeaderTableCell,
 }) => {
   return (
     <>
@@ -197,7 +194,6 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
               {/* 日にち */}
               <DailyCheckDateRow
                 StyledTableCell={StyledTableCell}
-                HeaderTableCell={HeaderTableCell}
                 printDateHeight={printDateHeight}
                 daysInMonth={daysInMonth}
                 dailyChecklistYear={dailyChecklistYear}
@@ -210,12 +206,10 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
                   inspectionData={inspectionData}
                   StyledTableCell={StyledTableCell}
                   checkItemHight={checkItemHight}
-                  daysInMonth={daysInMonth}
                   dailyChecklistYear={dailyChecklistYear}
                   dailyChecklistMonth={dailyChecklistMonth}
+                  daysInMonth={daysInMonth}
                   getDayInfo={getDayInfo}
-                  hasWhiteCellInSection={hasWhiteCellInSection}
-                  shouldRenderCell={shouldRenderCell}
                 />
                 {/* ======================================================================= */}
                 {/* 備考欄 */}
@@ -229,7 +223,10 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
             </Table>
           </TableContainer>
           {/* フッター */}
-          <DailyCheckFooter printFooterHeight={printFooterHeight} />
+          <DailyCheckFooter
+            printFooterHeight={printFooterHeight}
+            finalRevision={finalRevision}
+          />
         </Paper>
       </Box>
     </>

@@ -2,7 +2,9 @@ export interface InspectionItem {
   label: string;
   frequency:
     | 'daily_weekdays'
-    | 'weekly_friday'
+    | 'first-WeekdayOfWeek'
+    | 'last-WeekdayOfWeek'
+    | 'every-Wednesday'
     | 'monthly_first'
     | 'monthly_last'
     | 'flexible';

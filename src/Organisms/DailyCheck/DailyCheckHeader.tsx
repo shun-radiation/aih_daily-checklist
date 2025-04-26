@@ -1,5 +1,5 @@
 import { Box, Grid, Stack, Typography } from '@mui/material';
-import { DeviceInspection } from '../../types';
+import { DeviceInspection } from '../../types/types';
 
 interface DailyCheckHeaderProps {
   printHeaderHeight: number;

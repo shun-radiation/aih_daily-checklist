@@ -2,10 +2,12 @@ import { Box, Typography } from '@mui/material';
 
 interface DailyCheckFooterProps {
   printFooterHeight: number;
+  finalRevision: string;
 }
 
 const DailyCheckFooter: React.FC<DailyCheckFooterProps> = ({
   printFooterHeight,
+  finalRevision,
 }) => {
   return (
     <Box
@@ -17,7 +19,7 @@ const DailyCheckFooter: React.FC<DailyCheckFooterProps> = ({
       }}
     >
       <Typography sx={{ fontSize: '10px', pr: '2px', pt: '2px' }}>
-        最終改訂：2025/01/01
+        最終改訂：{finalRevision}
       </Typography>
     </Box>
   );

@@ -3,7 +3,6 @@ import { FC } from 'react';
 
 type DateRowProps = {
   StyledTableCell: React.ElementType;
-  HeaderTableCell: React.ElementType;
   printDateHeight: number;
   daysInMonth: number;
   dailyChecklistYear: number;
@@ -21,7 +20,6 @@ type DateRowProps = {
 
 const DailyCheckDateRow: FC<DateRowProps> = ({
   StyledTableCell,
-  HeaderTableCell,
   printDateHeight,
   daysInMonth,
   dailyChecklistYear,
@@ -37,12 +35,16 @@ const DailyCheckDateRow: FC<DateRowProps> = ({
       }}
     >
       <TableRow>
-        <HeaderTableCell
-          sx={{ border: '3px solid black', boxSizing: 'border-box' }}
+        <StyledTableCell
+          sx={{
+            border: '3px solid black',
+            boxSizing: 'border-box',
+            fontWeight: 'bold',
+          }}
           colSpan={2}
         >
           点検項目
-        </HeaderTableCell>
+        </StyledTableCell>
         {[...Array(daysInMonth)].map((_, i) => {
           const dayInfo = getDayInfo(
             dailyChecklistYear,
