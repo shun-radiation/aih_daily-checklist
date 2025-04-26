@@ -18,7 +18,9 @@ const DailyCheckFooter: React.FC<DailyCheckFooterProps> = ({
         boxSizing: 'border-box',
       }}
     >
-      <Typography sx={{ fontSize: '10px', pr: '2px', pt: '2px' }}>
+      <Typography
+        sx={{ fontWeight: '400', fontSize: '9px', pr: '2px', pt: '2px' }}
+      >
         最終改訂：{finalRevision}
       </Typography>
     </Box>

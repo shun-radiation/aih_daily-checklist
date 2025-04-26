@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { DeviceInspection, InspectionCategory } from '../../types/types';
-import { TableRow } from '@mui/material';
+import { TableRow, Typography } from '@mui/material';
 import { getHolidaysOf } from 'japanese-holidays';
 
 type ListItemsProps = {
@@ -242,7 +242,11 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
                     width: '40px',
                   }}
                 >
-                  {section.category}
+                  {section.category.map((category, categoryIndex) => (
+                    <Typography key={categoryIndex} sx={{ fontWeight: '700' }}>
+                      {category}
+                    </Typography>
+                  ))}
                 </StyledTableCell>
               )}
 
@@ -261,7 +265,7 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
                   px: 2,
                 }}
               >
-                {item.label}
+                <Typography sx={{ fontWeight: '500' }}>{item.label}</Typography>
               </StyledTableCell>
               {[...Array(daysInMonth)].map((_, dayIndex) => {
                 const dayInfo = getDayInfo(

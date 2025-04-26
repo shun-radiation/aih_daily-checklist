@@ -22,13 +22,12 @@ const DailyCheckRemarks: FC<RemarksProps> = ({
           sx={{
             writingMode: 'vertical-rl',
             textOrientation: 'upright',
-            fontWeight: 'bold',
             backgroundColor: '#f0f0f0',
             border: '3px solid black',
             height: `${printRemarksHeight}mm`,
           }}
         >
-          備考
+          <Typography sx={{ fontWeight: '700' }}>備考</Typography>
         </StyledTableCell>
 
         <TableCell
@@ -54,7 +53,12 @@ const DailyCheckRemarks: FC<RemarksProps> = ({
             }}
           >
             {RemarksContents.map((remarksContent, index) => (
-              <Typography key={index}>{remarksContent}</Typography>
+              <Typography
+                key={index}
+                sx={{ fontWeight: '400', fontSize: '9px' }}
+              >
+                {remarksContent}
+              </Typography>
             ))}
           </Box>
         </TableCell>

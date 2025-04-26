@@ -12,7 +12,7 @@ const inspectionData: DeviceInspection = {
   deviceName: '13撮影室',
   inspections: [
     {
-      category: '始業点検',
+      category: ['始業点検'],
       items: [
         { label: '電源投入後、表示灯の確認', frequency: 'daily_weekdays' },
         { label: '歯科撮影用装置の電源投入', frequency: 'daily_weekdays' },
@@ -36,7 +36,7 @@ const inspectionData: DeviceInspection = {
       ],
     },
     {
-      category: '終業点検',
+      category: ['終業点検'],
       items: [
         { label: '撮影室の整理・整頓', frequency: 'daily_weekdays' },
         { label: '撮影台・備品の清掃', frequency: 'daily_weekdays' },
@@ -53,7 +53,7 @@ const inspectionData: DeviceInspection = {
       ],
     },
     {
-      category: '週間点検',
+      category: ['月間点検', '週間点検'],
       items: [
         { label: '撮影室の清掃', frequency: 'last-WeekdayOfWeek' },
         { label: '寝具・衣類の交換', frequency: 'last-WeekdayOfWeek' },
@@ -63,7 +63,7 @@ const inspectionData: DeviceInspection = {
         },
         { label: '手洗い場の清掃', frequency: 'last-WeekdayOfWeek' },
         {
-          label: '手指消毒液③⑤⑥の残量・使用本数確認 (月初) ※',
+          label: '手指消毒液③⑤⑥の残量確認 (月初) ※',
           frequency: 'monthly_first',
         },
         { label: '時計の時間合わせ (月末)', frequency: 'monthly_last' },

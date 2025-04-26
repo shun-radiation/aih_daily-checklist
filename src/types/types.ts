@@ -11,7 +11,7 @@ export interface InspectionItem {
 }
 
 export interface InspectionCategory {
-  category: string;
+  category: string[];
   items: InspectionItem[];
 }
 

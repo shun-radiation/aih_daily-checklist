@@ -1,4 +1,4 @@
-import { TableHead, TableRow } from '@mui/material';
+import { TableHead, TableRow, Typography } from '@mui/material';
 import { FC } from 'react';
 
 type DateRowProps = {
@@ -43,7 +43,7 @@ const DailyCheckDateRow: FC<DateRowProps> = ({
           }}
           colSpan={2}
         >
-          点検項目
+          <Typography sx={{ fontWeight: '500' }}>点検項目</Typography>
         </StyledTableCell>
         {[...Array(daysInMonth)].map((_, i) => {
           const dayInfo = getDayInfo(

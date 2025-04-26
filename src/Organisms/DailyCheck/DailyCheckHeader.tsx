@@ -46,9 +46,15 @@ const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
             pb: 1,
           }}
         >
-          <Typography variant='h4'>{`保守点検表 (${inspectionData.deviceName})`}</Typography>
-          <Typography variant='h4'>{`${dailyChecklistYear}年${dailyChecklistMonth}月`}</Typography>
-          <Typography variant='h4'>aaa病院 aaaaaaaa</Typography>
+          <Typography
+            sx={{ fontWeight: '500', fontSize: '25px' }}
+          >{`保守点検表 (${inspectionData.deviceName})`}</Typography>
+          <Typography
+            sx={{ fontWeight: '500', fontSize: '25px' }}
+          >{`${dailyChecklistYear}年${dailyChecklistMonth}月`}</Typography>
+          <Typography sx={{ fontWeight: '500', fontSize: '25px' }}>
+            aaa病院 aaaaaaaa
+          </Typography>
         </Grid>
       </Box>
       <Box
@@ -71,7 +77,7 @@ const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
             justifyContent: 'center',
           }}
         >
-          <Typography>所属長</Typography>
+          <Typography sx={{ fontWeight: '400' }}>所属長</Typography>
           <Box
             sx={{
               height: '85%',
@@ -92,7 +98,7 @@ const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
             boxSizing: 'border-box',
           }}
         >
-          <Typography>放射線機器管理委員</Typography>
+          <Typography sx={{ fontWeight: '400' }}>放射線機器管理委員</Typography>
           <Box
             sx={{
               height: '85%',

@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 type YearMonthButtonProps = {
   displayRoom: string;
@@ -71,7 +71,7 @@ const DailyCheckYearMonthButton: React.FC<YearMonthButtonProps> = ({
           >
             {yearList.map((year) => (
               <MenuItem key={year} value={year}>
-                {year}
+                <Typography sx={{ fontWeight: '500' }}>{year}</Typography>
               </MenuItem>
             ))}
           </Select>
@@ -90,7 +90,7 @@ const DailyCheckYearMonthButton: React.FC<YearMonthButtonProps> = ({
           >
             {monthList.map((month) => (
               <MenuItem key={month} value={month}>
-                {month}
+                <Typography sx={{ fontWeight: '500' }}>{month}</Typography>
               </MenuItem>
             ))}
           </Select>
@@ -110,7 +110,7 @@ const DailyCheckYearMonthButton: React.FC<YearMonthButtonProps> = ({
           >
             {roomList.map((room) => (
               <MenuItem key={room} value={room}>
-                {room}
+                <Typography sx={{ fontWeight: '500' }}>{room}</Typography>
               </MenuItem>
             ))}
           </Select>
