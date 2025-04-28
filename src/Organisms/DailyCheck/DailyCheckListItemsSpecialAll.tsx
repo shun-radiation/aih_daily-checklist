@@ -2,12 +2,13 @@ import React, { FC } from 'react';
 import { DeviceInspection, InspectionCategory } from '../../types/types';
 import { Box, TableRow, Typography } from '@mui/material';
 
-type ListItemsProps = {
+type DailyCheckListItemsSpecialAllProps = {
   formatDate: (year: number, month: number, date: number) => string;
   totalHolidays: string[];
   inspectionData: DeviceInspection;
   StyledTableCell: React.ElementType;
   checkItemHight: number;
+  categoryColSpan?: number;
   categoryCellWidthPx?: string;
   categoryCellWitingMode?: string;
   labelTextAlign?: string;
@@ -27,12 +28,13 @@ type ListItemsProps = {
   };
 };
 
-const DailyCheckListItems: FC<ListItemsProps> = ({
+const DailyCheckListItemsSpecialAll: FC<DailyCheckListItemsSpecialAllProps> = ({
   formatDate,
   totalHolidays,
   inspectionData,
   StyledTableCell,
   checkItemHight,
+  categoryColSpan = 1,
   categoryCellWidthPx = '45px',
   categoryCellWitingMode = 'vertical-rl',
   labelTextAlign,
@@ -43,6 +45,25 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
   daysInMonth,
   getDayInfo,
 }) => {
+  // 指定日が平日かどうかを判定、return で true or false を返す。
+  const judgeWeekdays = (year: number, month: number, day: number) => {
+    const dayOfWeek = getDayInfo(year, month, day).dayOfWeek;
+    if (
+      dayOfWeek >= 1 &&
+      dayOfWeek <= 5 &&
+      !totalHolidays.includes(formatDate(year, month, day))
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  // 指定日が土日かどうかを判定、return で true or false を返す。
+  const judgeHolidays = (year: number, month: number, day: number) => {
+    return !judgeWeekdays(year, month, day);
+  };
+
   // 指定月の最初の平日を取得
   const getFirstWeekdayOfMonth = (year: number, month: number) => {
     const firstDay = new Date(year, month - 1, 1);
@@ -225,6 +246,7 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
     dailyChecklistYear,
     dailyChecklistMonth
   );
+
   const shouldRenderCell = (day: number, frequency: string): boolean => {
     const FirstWeekdayOfWeek = getFirstWeekdayOfWeek(
       dailyChecklistYear,
@@ -246,9 +268,14 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
       dailyChecklistMonth,
       day
     );
+
     switch (frequency) {
-      case 'daily_weekdays':
+      case 'every-day':
         return true;
+      case 'daily_weekdays':
+        return judgeWeekdays(dailyChecklistYear, dailyChecklistMonth, day);
+      case 'daily_Holidays':
+        return judgeHolidays(dailyChecklistYear, dailyChecklistMonth, day);
       case 'first-WeekdayOfWeek':
         return day === FirstWeekdayOfWeek; // 週の最初の平日
       case 'last-WeekdayOfWeek':
@@ -274,18 +301,20 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
 
   // weekdayの日数(月の土日を除く日数)をカウントし、幅を800pxとして1セルあたりのpx数(切り捨て)を変数に代入する。
   // allCheckCellsWidthPxの初期値は800とする。
-  const weekdayCellCount: number = [...Array(daysInMonth)].filter(
-    (_, dayIndex) => {
-      const dayInfo = getDayInfo(
-        dailyChecklistYear,
-        dailyChecklistMonth,
-        dayIndex + 1
-      );
-      return dayInfo.weekday !== '土' && dayInfo.weekday !== '日';
-    }
-  ).length;
+  //   const weekdayCellCount: number = [...Array(daysInMonth)].filter(
+  //     (_, dayIndex) => {
+  //       const dayInfo = getDayInfo(
+  //         dailyChecklistYear,
+  //         dailyChecklistMonth,
+  //         dayIndex + 1
+  //       );
+  //       return dayInfo.weekday !== '土' && dayInfo.weekday !== '日';
+  //     }
+  //   ).length;
+
+  // weekdayCellCount を、 daysInMonth に変更。
   const checkCellWidthPx: number = Math.trunc(
-    allCheckCellsWidthPx / weekdayCellCount
+    allCheckCellsWidthPx / daysInMonth
   );
   // console.log(checkCellWidthPx);
 
@@ -298,6 +327,7 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
             <TableRow key={`${sectionIndex}-${itemIndex}`}>
               {isFirst && (
                 <StyledTableCell
+                  colSpan={categoryColSpan} // デフォルト：1
                   rowSpan={section.items.length}
                   sx={{
                     writingMode: categoryCellWitingMode, // デフォルト：'vertical-rl'
@@ -369,66 +399,30 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
                   dayIndex + 1
                 );
                 return (
-                  dayInfo.weekday !== '日' && //日を除外
-                  dayInfo.weekday !== '土' && //土を除外
-                  (totalHolidays.includes(
-                    formatDate(
-                      dailyChecklistYear,
-                      dailyChecklistMonth,
-                      dayIndex + 1
-                    )
-                  ) ? (
-                    // 祝日の場合
-                    <StyledTableCell
-                      key={dayIndex}
-                      sx={{
-                        height: `${checkItemHight}mm`,
-                        width: `${checkCellWidthPx}px`,
-                        borderTop:
-                          itemIndex === 0
-                            ? '3px solid black'
-                            : '1px solid black',
-                        boxSizing: 'border-box',
-                        backgroundColor: 'lightBlue',
-                        borderRight:
-                          dayInfo.weekday === '金' ||
-                          dayIndex + 1 === daysInMonth
-                            ? '3px solid black'
-                            : '1px solid black',
-                      }}
-                    >
-                      &nbsp;
-                    </StyledTableCell>
-                  ) : (
-                    // 平日の場合
-                    <StyledTableCell
-                      key={dayIndex}
-                      sx={{
-                        height: `${checkItemHight}mm`,
-                        width: `${checkCellWidthPx}px`,
-                        borderTop:
-                          itemIndex === 0
-                            ? '3px solid black'
-                            : '1px solid black',
-                        boxSizing: 'border-box',
-                        backgroundColor:
-                          item.frequency === 'flexible'
-                            ? hasWhiteCellInSection(section, dayIndex + 1)
-                              ? 'white'
-                              : 'lightblue'
-                            : shouldRenderCell(dayIndex + 1, item.frequency)
+                  <StyledTableCell
+                    key={dayIndex}
+                    sx={{
+                      height: `${checkItemHight}mm`,
+                      width: `${checkCellWidthPx}px`,
+                      borderTop:
+                        itemIndex === 0 ? '3px solid black' : '1px solid black',
+                      boxSizing: 'border-box',
+                      backgroundColor:
+                        item.frequency === 'flexible'
+                          ? hasWhiteCellInSection(section, dayIndex + 1)
                             ? 'white'
-                            : 'lightblue',
-                        borderRight:
-                          dayInfo.weekday === '金' ||
-                          dayIndex + 1 === daysInMonth
-                            ? '3px solid black'
-                            : '1px solid black',
-                      }}
-                    >
-                      &nbsp;
-                    </StyledTableCell>
-                  ))
+                            : 'lightblue'
+                          : shouldRenderCell(dayIndex + 1, item.frequency)
+                          ? 'white'
+                          : 'lightblue',
+                      borderRight:
+                        dayInfo.weekday === '日' || dayIndex + 1 === daysInMonth
+                          ? '3px solid black'
+                          : '1px solid black',
+                    }}
+                  >
+                    &nbsp;
+                  </StyledTableCell>
                 );
               })}
             </TableRow>
@@ -439,4 +433,4 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
   );
 };
 
-export default DailyCheckListItems;
+export default DailyCheckListItemsSpecialAll;

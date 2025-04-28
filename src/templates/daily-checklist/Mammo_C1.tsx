@@ -8,66 +8,76 @@ import DailyCheckRemarks from '../../Organisms/DailyCheck/DailyCheckRemarks';
 import DailyCheckFooter from '../../Organisms/DailyCheck/DailyCheckFooter';
 
 const inspectionData: DeviceInspection = {
-  // deviceId: '13-room',
-  // deviceName: '13番撮影室',
+  // deviceId: 'mammo-C1',
+  // deviceName: 'マンモグラフィー室 (6番撮影室)',
   inspections: [
     {
       category: ['始業点検'],
       items: [
         { label: '電源投入後、表示灯の確認', frequency: 'daily_weekdays' },
-        { label: '歯科撮影用装置の電源投入', frequency: 'daily_weekdays' },
         { label: '異音・異臭の有無', frequency: 'daily_weekdays' },
-        { label: '1管球エージング (90-140kV)', frequency: 'daily_weekdays' },
-        { label: '2管球エージング (70-100kV)', frequency: 'daily_weekdays' },
-        { label: 'X線管保持装置の動作確認', frequency: 'daily_weekdays' },
-        { label: '立位リーダーとのアライメント', frequency: 'daily_weekdays' },
-        { label: '臥位テーブルとのアライメント', frequency: 'daily_weekdays' },
-        { label: '可動絞りの動作確認', frequency: 'daily_weekdays' },
-        { label: '照射野ランプの点灯確認', frequency: 'daily_weekdays' },
-        { label: '立位・臥位撮影台の動作確認', frequency: 'daily_weekdays' },
-        { label: '立位・臥位パネルの起動確認', frequency: 'daily_weekdays' },
+        { label: 'キャリブレーション', frequency: 'daily_weekdays' },
         {
-          label: '歯科用装置のテスト撮影(CBCTのみ)',
+          label: '保持装置の動作確認 (左右90度も含む)',
           frequency: 'daily_weekdays',
         },
-        { label: '画質確認(CR)', frequency: 'daily_weekdays' },
+        { label: '圧迫板の動作確認 (自動退避)', frequency: 'daily_weekdays' },
+        { label: '照射野ランプの点灯確認', frequency: 'daily_weekdays' },
+        { label: '1shotファントム評価', frequency: 'daily_weekdays' },
+        { label: 'マンモビューアーの起動確認', frequency: 'daily_weekdays' },
+        {
+          label: 'RadiCS (モニターパターンチェック)',
+          frequency: 'daily_weekdays',
+        },
+        { label: '室温の確認 (20~30度)', frequency: 'daily_weekdays' },
+        { label: '湿度の確認 (30~75%)', frequency: 'daily_weekdays' },
         { label: '実施者サイン', frequency: 'flexible' },
-        { label: '画質確認者サイン', frequency: 'flexible' },
       ],
     },
     {
       category: ['終業点検'],
       items: [
-        { label: '撮影室の整理・整頓', frequency: 'daily_weekdays' },
-        { label: '撮影台・備品の清掃', frequency: 'daily_weekdays' },
-        {
-          label: 'カセッテ(IP)の清掃',
-          frequency: 'daily_weekdays',
-        },
-        { label: '補助具・備品の紛失 チェック', frequency: 'daily_weekdays' },
-        {
-          label: 'CBCT申込書サインチェック(2か所) ※',
-          frequency: 'daily_weekdays',
-        },
+        { label: '装置・備品の清掃・整理整頓', frequency: 'daily_weekdays' },
+        { label: '備品の紛失 チェック', frequency: 'daily_weekdays' },
+        { label: 'データバックアップの確認', frequency: 'daily_weekdays' },
+        { label: 'synapse転送の確認', frequency: 'daily_weekdays' },
+        { label: '加湿器の注水 (使用時期のみ)', frequency: 'daily_weekdays' },
+        { label: '除湿機の注水 (使用時期のみ)', frequency: 'daily_weekdays' },
+        { label: '室温の確認 (20~30度)', frequency: 'daily_weekdays' },
+        { label: '湿度の確認 (30~75%)', frequency: 'daily_weekdays' },
         { label: '実施者サイン', frequency: 'flexible' },
       ],
     },
     {
       category: ['月間点検', '週間点検'],
       items: [
+        {
+          label: '156およびｽﾃｯﾌﾟﾌｧﾝﾄﾑ評価 (毎週水曜)',
+          frequency: 'every-Wednesday',
+        },
         { label: '撮影室の清掃', frequency: 'last-WeekdayOfWeek' },
-        { label: '寝具・衣類の交換', frequency: 'last-WeekdayOfWeek' },
+        { label: '手洗い場の清掃', frequency: 'last-WeekdayOfWeek' },
         {
           label: 'コンソールモニター及び周辺の清掃',
           frequency: 'last-WeekdayOfWeek',
         },
-        { label: '手洗い場の清掃', frequency: 'last-WeekdayOfWeek' },
         {
-          label: '手指消毒液③⑤⑥の残量確認 (月初) ※',
+          label: '寝具の交換 (タオルケット・枕カバー)',
+          frequency: 'last-WeekdayOfWeek',
+        },
+        {
+          label: '手指消毒液⑪の残量確認 (月初) ※',
           frequency: 'monthly_first',
         },
+        {
+          label: '加湿器のフィルター清掃 (月末)',
+          frequency: 'monthly_last',
+        },
         { label: '時計の時間合わせ (月末)', frequency: 'monthly_last' },
-        { label: 'CBCT検査申込書の整理 (月末)', frequency: 'monthly_last' },
+        {
+          label: 'ハードディスクのデータ削除 (月末)',
+          frequency: 'monthly_last',
+        },
         {
           label: '実施者サイン',
           frequency: 'flexible',
@@ -82,7 +92,8 @@ const inspectionData: DeviceInspection = {
 };
 
 const RemarksContents: string[] = [
-  '※ CBCT検査申込書(6ヶ月保管)ファイルに1ヵ月分の申込書を綴じ、6ヶ月を超えた申込書を廃棄してください。',
+  '※ 1shotファントム ➡︎ AEC：Auto , 圧迫厚：45mm で撮影',
+  '※ 156ファントム ➡︎ AEC：Auto , 圧迫厚：50mm で撮影',
   '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
 ];
 
@@ -99,21 +110,23 @@ const printWidthMM: number = 297 - 10;
 
 const printHeaderHeight: number = printHeightMM * 0.08;
 const printDateHeight: number = printHeightMM * 0.04;
-const printRemarksHeight: number = printHeightMM * 0.1;
+// const printRemarksHeight: number = printHeightMM * 0.1;
 const printFooterHeight: number = printHeightMM * 0.03;
-const printChecklistHeight: number =
-  printHeightMM -
-  printHeaderHeight -
-  printDateHeight -
-  printRemarksHeight -
-  printFooterHeight;
+// =======================
+// const printChecklistHeight: number =
+//   printHeightMM -
+//   printHeaderHeight -
+//   printDateHeight -
+//   printRemarksHeight -
+//   printFooterHeight;
 
-const checkItemLength: number =
-  inspectionData.inspections[0].items.length +
-  inspectionData.inspections[1].items.length +
-  inspectionData.inspections[2].items.length;
+// const checkItemLength: number =
+//   inspectionData.inspections[0].items.length +
+//   inspectionData.inspections[1].items.length +
+//   inspectionData.inspections[2].items.length;
+// const checkItemHight: number = printChecklistHeight / checkItemLength;
+// =======================
 
-const checkItemHight: number = printChecklistHeight / checkItemLength;
 // const checkItemHight: string = `calc((${printHeight.replace(
 //   /^calc\((.*)\)$/,
 //   '$1'
@@ -131,7 +144,7 @@ const checkItemHight: number = printChecklistHeight / checkItemLength;
 // console.log('備考', printRemarksHeight);
 // console.log('フッター', printFooterHeight);
 
-type XrayRoom13Props = {
+type MammoC1Props = {
   formatDate: (year: number, month: number, date: number) => string;
   totalHolidays: string[];
   displayRoom: string;
@@ -150,7 +163,7 @@ type XrayRoom13Props = {
   };
 };
 
-const XrayRoom13: FC<XrayRoom13Props> = ({
+const Mammo_C1: FC<MammoC1Props> = ({
   formatDate,
   totalHolidays,
   displayRoom,
@@ -215,7 +228,9 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
                   totalHolidays={totalHolidays}
                   inspectionData={inspectionData}
                   StyledTableCell={StyledTableCell}
-                  checkItemHight={checkItemHight}
+                  //   checkItemHight={checkItemHight}
+                  checkItemHight={4} //  4mmに変更
+                  checkItemFontSize={'10px'} //  10pxに変更
                   dailyChecklistYear={dailyChecklistYear}
                   dailyChecklistMonth={dailyChecklistMonth}
                   daysInMonth={daysInMonth}
@@ -225,7 +240,7 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
                 {/* 備考欄 */}
                 <DailyCheckRemarks
                   StyledTableCell={StyledTableCell}
-                  printRemarksHeight={printRemarksHeight}
+                  printRemarksHeight={38} //  38mmに変更
                   daysInMonth={daysInMonth}
                   RemarksContents={RemarksContents}
                 />
@@ -243,4 +258,4 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
   );
 };
 
-export default XrayRoom13;
+export default Mammo_C1;

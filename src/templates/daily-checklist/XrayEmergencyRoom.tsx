@@ -8,17 +8,16 @@ import DailyCheckRemarks from '../../Organisms/DailyCheck/DailyCheckRemarks';
 import DailyCheckFooter from '../../Organisms/DailyCheck/DailyCheckFooter';
 
 const inspectionData: DeviceInspection = {
-  // deviceId: '13-room',
-  // deviceName: '13番撮影室',
+  //   deviceId: 'XrayEmergencyRoom',
+  //   deviceName: '救急外来撮影室',
   inspections: [
     {
       category: ['始業点検'],
       items: [
         { label: '電源投入後、表示灯の確認', frequency: 'daily_weekdays' },
-        { label: '歯科撮影用装置の電源投入', frequency: 'daily_weekdays' },
         { label: '異音・異臭の有無', frequency: 'daily_weekdays' },
-        { label: '1管球エージング (90-140kV)', frequency: 'daily_weekdays' },
-        { label: '2管球エージング (70-100kV)', frequency: 'daily_weekdays' },
+        { label: '1管球エージング (90-120kV)', frequency: 'daily_weekdays' },
+        { label: '2管球エージング (50-110kV)', frequency: 'daily_weekdays' },
         { label: 'X線管保持装置の動作確認', frequency: 'daily_weekdays' },
         { label: '立位リーダーとのアライメント', frequency: 'daily_weekdays' },
         { label: '臥位テーブルとのアライメント', frequency: 'daily_weekdays' },
@@ -26,13 +25,11 @@ const inspectionData: DeviceInspection = {
         { label: '照射野ランプの点灯確認', frequency: 'daily_weekdays' },
         { label: '立位・臥位撮影台の動作確認', frequency: 'daily_weekdays' },
         { label: '立位・臥位パネルの起動確認', frequency: 'daily_weekdays' },
-        {
-          label: '歯科用装置のテスト撮影(CBCTのみ)',
-          frequency: 'daily_weekdays',
-        },
-        { label: '画質確認(CR)', frequency: 'daily_weekdays' },
+        { label: 'FLEXA VISION の動作確認', frequency: 'daily_weekdays' },
+        { label: '画質確認(1管球)', frequency: 'daily_weekdays' },
+        { label: '画質確認(2管球)', frequency: 'daily_weekdays' },
+        { label: '2枚の画像QA2へ送信', frequency: 'daily_weekdays' },
         { label: '実施者サイン', frequency: 'flexible' },
-        { label: '画質確認者サイン', frequency: 'flexible' },
       ],
     },
     {
@@ -45,8 +42,9 @@ const inspectionData: DeviceInspection = {
           frequency: 'daily_weekdays',
         },
         { label: '補助具・備品の紛失 チェック', frequency: 'daily_weekdays' },
+        { label: 'CRシステムの再起動', frequency: 'daily_weekdays' },
         {
-          label: 'CBCT申込書サインチェック(2か所) ※',
+          label: '撮影室の汚物処理用排水口の水を流す',
           frequency: 'daily_weekdays',
         },
         { label: '実施者サイン', frequency: 'flexible' },
@@ -61,13 +59,12 @@ const inspectionData: DeviceInspection = {
           label: 'コンソールモニター及び周辺の清掃',
           frequency: 'last-WeekdayOfWeek',
         },
-        { label: '手洗い場の清掃', frequency: 'last-WeekdayOfWeek' },
-        {
-          label: '手指消毒液③⑤⑥の残量確認 (月初) ※',
-          frequency: 'monthly_first',
-        },
+        // {
+        //   label: '手指消毒液○の残量確認 (月初) ※',
+        //   frequency: 'monthly_first',
+        // },
+        { label: 'エアコンフィルターの清掃 (月末)', frequency: 'monthly_last' },
         { label: '時計の時間合わせ (月末)', frequency: 'monthly_last' },
-        { label: 'CBCT検査申込書の整理 (月末)', frequency: 'monthly_last' },
         {
           label: '実施者サイン',
           frequency: 'flexible',
@@ -81,9 +78,9 @@ const inspectionData: DeviceInspection = {
   ],
 };
 
-const RemarksContents: string[] = [
-  '※ CBCT検査申込書(6ヶ月保管)ファイルに1ヵ月分の申込書を綴じ、6ヶ月を超えた申込書を廃棄してください。',
-  '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
+const RemarksContents = [
+  //   '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
+  '',
 ];
 
 // 最終改訂日:yyyy/MM/dd の形式で統一
@@ -131,7 +128,7 @@ const checkItemHight: number = printChecklistHeight / checkItemLength;
 // console.log('備考', printRemarksHeight);
 // console.log('フッター', printFooterHeight);
 
-type XrayRoom13Props = {
+type XrayEmergencyRoomProps = {
   formatDate: (year: number, month: number, date: number) => string;
   totalHolidays: string[];
   displayRoom: string;
@@ -150,7 +147,7 @@ type XrayRoom13Props = {
   };
 };
 
-const XrayRoom13: FC<XrayRoom13Props> = ({
+const XrayEmergencyRoom: FC<XrayEmergencyRoomProps> = ({
   formatDate,
   totalHolidays,
   displayRoom,
@@ -216,9 +213,9 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
                   inspectionData={inspectionData}
                   StyledTableCell={StyledTableCell}
                   checkItemHight={checkItemHight}
+                  daysInMonth={daysInMonth}
                   dailyChecklistYear={dailyChecklistYear}
                   dailyChecklistMonth={dailyChecklistMonth}
-                  daysInMonth={daysInMonth}
                   getDayInfo={getDayInfo}
                 />
                 {/* ======================================================================= */}
@@ -243,4 +240,4 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
   );
 };
 
-export default XrayRoom13;
+export default XrayEmergencyRoom;

@@ -8,17 +8,15 @@ import DailyCheckRemarks from '../../Organisms/DailyCheck/DailyCheckRemarks';
 import DailyCheckFooter from '../../Organisms/DailyCheck/DailyCheckFooter';
 
 const inspectionData: DeviceInspection = {
-  // deviceId: '13-room',
-  // deviceName: '13番撮影室',
+  deviceId: '19-room',
+  deviceName: '19番撮影室',
   inspections: [
     {
       category: ['始業点検'],
       items: [
         { label: '電源投入後、表示灯の確認', frequency: 'daily_weekdays' },
-        { label: '歯科撮影用装置の電源投入', frequency: 'daily_weekdays' },
         { label: '異音・異臭の有無', frequency: 'daily_weekdays' },
-        { label: '1管球エージング (90-140kV)', frequency: 'daily_weekdays' },
-        { label: '2管球エージング (70-100kV)', frequency: 'daily_weekdays' },
+        { label: '管球エージング (90-140kV)', frequency: 'daily_weekdays' },
         { label: 'X線管保持装置の動作確認', frequency: 'daily_weekdays' },
         { label: '立位リーダーとのアライメント', frequency: 'daily_weekdays' },
         { label: '臥位テーブルとのアライメント', frequency: 'daily_weekdays' },
@@ -26,10 +24,7 @@ const inspectionData: DeviceInspection = {
         { label: '照射野ランプの点灯確認', frequency: 'daily_weekdays' },
         { label: '立位・臥位撮影台の動作確認', frequency: 'daily_weekdays' },
         { label: '立位・臥位パネルの起動確認', frequency: 'daily_weekdays' },
-        {
-          label: '歯科用装置のテスト撮影(CBCTのみ)',
-          frequency: 'daily_weekdays',
-        },
+        { label: 'CALNEO SQの起動確認', frequency: 'daily_weekdays' },
         { label: '画質確認(CR)', frequency: 'daily_weekdays' },
         { label: '実施者サイン', frequency: 'flexible' },
         { label: '画質確認者サイン', frequency: 'flexible' },
@@ -45,10 +40,6 @@ const inspectionData: DeviceInspection = {
           frequency: 'daily_weekdays',
         },
         { label: '補助具・備品の紛失 チェック', frequency: 'daily_weekdays' },
-        {
-          label: 'CBCT申込書サインチェック(2か所) ※',
-          frequency: 'daily_weekdays',
-        },
         { label: '実施者サイン', frequency: 'flexible' },
       ],
     },
@@ -61,13 +52,11 @@ const inspectionData: DeviceInspection = {
           label: 'コンソールモニター及び周辺の清掃',
           frequency: 'last-WeekdayOfWeek',
         },
-        { label: '手洗い場の清掃', frequency: 'last-WeekdayOfWeek' },
         {
-          label: '手指消毒液③⑤⑥の残量確認 (月初) ※',
+          label: '手指消毒液①②④の残量確認 (月初) ※',
           frequency: 'monthly_first',
         },
         { label: '時計の時間合わせ (月末)', frequency: 'monthly_last' },
-        { label: 'CBCT検査申込書の整理 (月末)', frequency: 'monthly_last' },
         {
           label: '実施者サイン',
           frequency: 'flexible',
@@ -81,13 +70,12 @@ const inspectionData: DeviceInspection = {
   ],
 };
 
-const RemarksContents: string[] = [
-  '※ CBCT検査申込書(6ヶ月保管)ファイルに1ヵ月分の申込書を綴じ、6ヶ月を超えた申込書を廃棄してください。',
+const RemarksContents = [
   '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
 ];
 
 // 最終改訂日:yyyy/MM/dd の形式で統一
-const finalRevision: string = '2025/01/01';
+const finalRevision: string = '2025/05/01';
 
 // maxWidth: '297mm',
 // maxHeight: '210mm',
@@ -131,7 +119,7 @@ const checkItemHight: number = printChecklistHeight / checkItemLength;
 // console.log('備考', printRemarksHeight);
 // console.log('フッター', printFooterHeight);
 
-type XrayRoom13Props = {
+type XrayRoom19Props = {
   formatDate: (year: number, month: number, date: number) => string;
   totalHolidays: string[];
   displayRoom: string;
@@ -150,7 +138,7 @@ type XrayRoom13Props = {
   };
 };
 
-const XrayRoom13: FC<XrayRoom13Props> = ({
+const XrayRoom19: FC<XrayRoom19Props> = ({
   formatDate,
   totalHolidays,
   displayRoom,
@@ -216,9 +204,9 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
                   inspectionData={inspectionData}
                   StyledTableCell={StyledTableCell}
                   checkItemHight={checkItemHight}
+                  daysInMonth={daysInMonth}
                   dailyChecklistYear={dailyChecklistYear}
                   dailyChecklistMonth={dailyChecklistMonth}
-                  daysInMonth={daysInMonth}
                   getDayInfo={getDayInfo}
                 />
                 {/* ======================================================================= */}
@@ -243,4 +231,4 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
   );
 };
 
-export default XrayRoom13;
+export default XrayRoom19;

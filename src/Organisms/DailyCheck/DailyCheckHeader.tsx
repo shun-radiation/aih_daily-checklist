@@ -1,16 +1,16 @@
 import { Box, Grid, Stack, Typography } from '@mui/material';
-import { DeviceInspection } from '../../types/types';
+// import { DeviceInspection } from '../../types/types';
 
 interface DailyCheckHeaderProps {
+  displayRoom: string;
   printHeaderHeight: number;
-  inspectionData: DeviceInspection;
   dailyChecklistYear: number;
   dailyChecklistMonth: number;
 }
 
 const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
+  displayRoom,
   printHeaderHeight,
-  inspectionData,
   dailyChecklistYear,
   dailyChecklistMonth,
 }) => {
@@ -42,13 +42,30 @@ const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
             justifyContent: 'space-between',
             alignItems: 'end',
             width: '100%',
-            px: 4,
+            px: 2,
             pb: 1,
           }}
         >
-          <Typography
-            sx={{ fontWeight: '500', fontSize: '25px' }}
-          >{`保守点検表 (${inspectionData.deviceName})`}</Typography>
+          <Box
+            sx={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}
+          >
+            <Typography
+              sx={{
+                fontWeight: '500',
+                fontSize: '20px',
+              }}
+            >
+              保守点検表
+            </Typography>
+            <Typography
+              sx={{
+                fontWeight: '500',
+                fontSize: '20px',
+              }}
+            >
+              {displayRoom}
+            </Typography>
+          </Box>
           <Typography
             sx={{ fontWeight: '500', fontSize: '25px' }}
           >{`${dailyChecklistYear}年${dailyChecklistMonth}月`}</Typography>
@@ -77,7 +94,7 @@ const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
             justifyContent: 'center',
           }}
         >
-          <Typography sx={{ fontWeight: '400' }}>所属長</Typography>
+          <Typography sx={{ fontWeight: '500' }}>所属長</Typography>
           <Box
             sx={{
               height: '85%',
@@ -98,7 +115,7 @@ const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
             boxSizing: 'border-box',
           }}
         >
-          <Typography sx={{ fontWeight: '400' }}>放射線機器管理委員</Typography>
+          <Typography sx={{ fontWeight: '500' }}>放射線機器管理委員</Typography>
           <Box
             sx={{
               height: '85%',

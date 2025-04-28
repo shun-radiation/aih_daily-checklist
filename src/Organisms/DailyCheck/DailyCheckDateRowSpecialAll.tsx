@@ -1,7 +1,7 @@
 import { TableHead, TableRow, Typography } from '@mui/material';
 import { FC } from 'react';
 
-type DateRowProps = {
+type AllDateRowProps = {
   formatDate: (year: number, month: number, date: number) => string;
   totalHolidays: string[];
   StyledTableCell: React.ElementType;
@@ -21,7 +21,7 @@ type DateRowProps = {
   };
 };
 
-const DailyCheckDateRow: FC<DateRowProps> = ({
+const DailyCheckDateRowSpecialAll: FC<AllDateRowProps> = ({
   formatDate,
   totalHolidays,
   StyledTableCell,
@@ -58,28 +58,33 @@ const DailyCheckDateRow: FC<DateRowProps> = ({
             i + 1
           );
           return (
-            dayInfo.weekday !== '日' &&
-            dayInfo.weekday !== '土' && (
-              <StyledTableCell
-                key={i}
-                sx={{
-                  lineHeight: '1.2',
-                  borderRight:
-                    dayInfo.weekday === '金'
-                      ? '3px solid black'
-                      : '1px solid black',
-                  color: totalHolidays.includes(
-                    formatDate(dailyChecklistYear, dailyChecklistMonth, i + 1)
-                  )
+            <StyledTableCell
+              key={i}
+              sx={{
+                lineHeight: '1.2',
+                borderRight:
+                  dayInfo.weekday === '日'
+                    ? '3px solid black'
+                    : '1px solid black',
+                color:
+                  dayInfo.weekday === '土'
+                    ? 'blue'
+                    : dayInfo.weekday === '日' ||
+                      totalHolidays.includes(
+                        formatDate(
+                          dailyChecklistYear,
+                          dailyChecklistMonth,
+                          i + 1
+                        )
+                      )
                     ? 'red'
                     : 'black',
-                }}
-              >
-                {dayInfo.label}
-                <br />
-                {dayInfo.weekday}
-              </StyledTableCell>
-            )
+              }}
+            >
+              {dayInfo.label}
+              <br />
+              {dayInfo.weekday}
+            </StyledTableCell>
           );
         })}
       </TableRow>
@@ -87,4 +92,4 @@ const DailyCheckDateRow: FC<DateRowProps> = ({
   );
 };
 
-export default DailyCheckDateRow;
+export default DailyCheckDateRowSpecialAll;

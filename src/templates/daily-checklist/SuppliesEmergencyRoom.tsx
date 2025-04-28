@@ -8,70 +8,52 @@ import DailyCheckRemarks from '../../Organisms/DailyCheck/DailyCheckRemarks';
 import DailyCheckFooter from '../../Organisms/DailyCheck/DailyCheckFooter';
 
 const inspectionData: DeviceInspection = {
-  // deviceId: '13-room',
-  // deviceName: '13番撮影室',
+  //   deviceId: 'SuppliesEmergencyRoom',
+  //   deviceName: '救急外来撮影室物品',
   inspections: [
     {
-      category: ['始業点検'],
+      category: ['救急外来撮影室物品'],
       items: [
-        { label: '電源投入後、表示灯の確認', frequency: 'daily_weekdays' },
-        { label: '歯科撮影用装置の電源投入', frequency: 'daily_weekdays' },
-        { label: '異音・異臭の有無', frequency: 'daily_weekdays' },
-        { label: '1管球エージング (90-140kV)', frequency: 'daily_weekdays' },
-        { label: '2管球エージング (70-100kV)', frequency: 'daily_weekdays' },
-        { label: 'X線管保持装置の動作確認', frequency: 'daily_weekdays' },
-        { label: '立位リーダーとのアライメント', frequency: 'daily_weekdays' },
-        { label: '臥位テーブルとのアライメント', frequency: 'daily_weekdays' },
-        { label: '可動絞りの動作確認', frequency: 'daily_weekdays' },
-        { label: '照射野ランプの点灯確認', frequency: 'daily_weekdays' },
-        { label: '立位・臥位撮影台の動作確認', frequency: 'daily_weekdays' },
-        { label: '立位・臥位パネルの起動確認', frequency: 'daily_weekdays' },
+        { label: '1. フィルムマーク', frequency: 'daily_weekdays' },
+        { label: '2. テープ・ガムテープ', frequency: 'daily_weekdays' },
+        { label: '3. 撮影用発泡スチロール各種', frequency: 'daily_weekdays' },
+        { label: '4. ビニール袋 (大・中・小)', frequency: 'daily_weekdays' },
         {
-          label: '歯科用装置のテスト撮影(CBCTのみ)',
+          label: '5. ビニール手袋・酒精綿・ガーゼ',
           frequency: 'daily_weekdays',
         },
-        { label: '画質確認(CR)', frequency: 'daily_weekdays' },
+        {
+          label: '6. ティッシュ・ペーパータオル',
+          frequency: 'daily_weekdays',
+        },
+        { label: '7. 手指消毒剤', frequency: 'daily_weekdays' },
+        { label: '8. 無水エタノール', frequency: 'daily_weekdays' },
+        { label: '9. 洗浄除菌タオル詰め替え用', frequency: 'daily_weekdays' },
+        { label: '10. マジック。メモ用紙など', frequency: 'daily_weekdays' },
+        {
+          label: '11. ハンドソープ・ハンドクリーム',
+          frequency: 'daily_weekdays',
+        },
+        { label: '12. 検査着', frequency: 'daily_weekdays' },
+        { label: '13. ナビガードエプロン', frequency: 'daily_weekdays' },
+        { label: '14. 防水シーツ', frequency: 'daily_weekdays' },
+        {
+          label: '15. サージカルマスク (ゴムタイプ)',
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: '16. アイガード',
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: '17. N95マスク (10枚以上)',
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: '18. ER用メモ用紙 (ER・3CT) 予備2',
+          frequency: 'daily_weekdays',
+        },
         { label: '実施者サイン', frequency: 'flexible' },
-        { label: '画質確認者サイン', frequency: 'flexible' },
-      ],
-    },
-    {
-      category: ['終業点検'],
-      items: [
-        { label: '撮影室の整理・整頓', frequency: 'daily_weekdays' },
-        { label: '撮影台・備品の清掃', frequency: 'daily_weekdays' },
-        {
-          label: 'カセッテ(IP)の清掃',
-          frequency: 'daily_weekdays',
-        },
-        { label: '補助具・備品の紛失 チェック', frequency: 'daily_weekdays' },
-        {
-          label: 'CBCT申込書サインチェック(2か所) ※',
-          frequency: 'daily_weekdays',
-        },
-        { label: '実施者サイン', frequency: 'flexible' },
-      ],
-    },
-    {
-      category: ['月間点検', '週間点検'],
-      items: [
-        { label: '撮影室の清掃', frequency: 'last-WeekdayOfWeek' },
-        { label: '寝具・衣類の交換', frequency: 'last-WeekdayOfWeek' },
-        {
-          label: 'コンソールモニター及び周辺の清掃',
-          frequency: 'last-WeekdayOfWeek',
-        },
-        { label: '手洗い場の清掃', frequency: 'last-WeekdayOfWeek' },
-        {
-          label: '手指消毒液③⑤⑥の残量確認 (月初) ※',
-          frequency: 'monthly_first',
-        },
-        { label: '時計の時間合わせ (月末)', frequency: 'monthly_last' },
-        { label: 'CBCT検査申込書の整理 (月末)', frequency: 'monthly_last' },
-        {
-          label: '実施者サイン',
-          frequency: 'flexible',
-        },
       ],
     },
     // {
@@ -81,9 +63,10 @@ const inspectionData: DeviceInspection = {
   ],
 };
 
-const RemarksContents: string[] = [
-  '※ CBCT検査申込書(6ヶ月保管)ファイルに1ヵ月分の申込書を綴じ、6ヶ月を超えた申込書を廃棄してください。',
-  '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
+const RemarksContents = [
+  //   '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
+  '※ 物品が無くなりそうな場合は補充してください (日勤・夜勤に迷惑がかからないようにしましょう)。',
+  '※ N95マスクは10枚以上補充してください。',
 ];
 
 // 最終改訂日:yyyy/MM/dd の形式で統一
@@ -99,7 +82,7 @@ const printWidthMM: number = 297 - 10;
 
 const printHeaderHeight: number = printHeightMM * 0.08;
 const printDateHeight: number = printHeightMM * 0.04;
-const printRemarksHeight: number = printHeightMM * 0.1;
+const printRemarksHeight: number = printHeightMM * 0.3; //  0.1から0.3へ変更
 const printFooterHeight: number = printHeightMM * 0.03;
 const printChecklistHeight: number =
   printHeightMM -
@@ -108,10 +91,9 @@ const printChecklistHeight: number =
   printRemarksHeight -
   printFooterHeight;
 
-const checkItemLength: number =
-  inspectionData.inspections[0].items.length +
-  inspectionData.inspections[1].items.length +
-  inspectionData.inspections[2].items.length;
+const checkItemLength: number = inspectionData.inspections[0].items.length;
+//   inspectionData.inspections[1].items.length;
+//   inspectionData.inspections[2].items.length;
 
 const checkItemHight: number = printChecklistHeight / checkItemLength;
 // const checkItemHight: string = `calc((${printHeight.replace(
@@ -131,7 +113,7 @@ const checkItemHight: number = printChecklistHeight / checkItemLength;
 // console.log('備考', printRemarksHeight);
 // console.log('フッター', printFooterHeight);
 
-type XrayRoom13Props = {
+type SuppliesEmergencyRoomProps = {
   formatDate: (year: number, month: number, date: number) => string;
   totalHolidays: string[];
   displayRoom: string;
@@ -150,7 +132,7 @@ type XrayRoom13Props = {
   };
 };
 
-const XrayRoom13: FC<XrayRoom13Props> = ({
+const SuppliesEmergencyRoom: FC<SuppliesEmergencyRoomProps> = ({
   formatDate,
   totalHolidays,
   displayRoom,
@@ -216,9 +198,9 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
                   inspectionData={inspectionData}
                   StyledTableCell={StyledTableCell}
                   checkItemHight={checkItemHight}
+                  daysInMonth={daysInMonth}
                   dailyChecklistYear={dailyChecklistYear}
                   dailyChecklistMonth={dailyChecklistMonth}
-                  daysInMonth={daysInMonth}
                   getDayInfo={getDayInfo}
                 />
                 {/* ======================================================================= */}
@@ -243,4 +225,4 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
   );
 };
 
-export default XrayRoom13;
+export default SuppliesEmergencyRoom;

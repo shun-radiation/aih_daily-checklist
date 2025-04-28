@@ -1,6 +1,14 @@
 import { FC } from 'react';
-import { Table, TableBody, TableContainer, Paper, Box } from '@mui/material';
-import { DeviceInspection } from '../../types/types';
+import {
+  Table,
+  TableBody,
+  TableContainer,
+  Paper,
+  Box,
+  Typography,
+  TableRow,
+} from '@mui/material';
+import { DeviceInspection, InspectionCategory } from '../../types/types';
 import DailyCheckHeader from '../../Organisms/DailyCheck/DailyCheckHeader';
 import DailyCheckDateRow from '../../Organisms/DailyCheck/DailyCheckDateRow';
 import DailyCheckListItems from '../../Organisms/DailyCheck/DailyCheckListItems';
@@ -8,69 +16,93 @@ import DailyCheckRemarks from '../../Organisms/DailyCheck/DailyCheckRemarks';
 import DailyCheckFooter from '../../Organisms/DailyCheck/DailyCheckFooter';
 
 const inspectionData: DeviceInspection = {
-  // deviceId: '13-room',
-  // deviceName: '13番撮影室',
+  //   deviceId: 'Portable51A_DailyInspection',
+  //   deviceName: 'ポータブル装置 (51A) - 日常点検',
   inspections: [
     {
-      category: ['始業点検'],
+      category: ['Mobile Art (1)'],
       items: [
-        { label: '電源投入後、表示灯の確認', frequency: 'daily_weekdays' },
-        { label: '歯科撮影用装置の電源投入', frequency: 'daily_weekdays' },
-        { label: '異音・異臭の有無', frequency: 'daily_weekdays' },
-        { label: '1管球エージング (90-140kV)', frequency: 'daily_weekdays' },
-        { label: '2管球エージング (70-100kV)', frequency: 'daily_weekdays' },
-        { label: 'X線管保持装置の動作確認', frequency: 'daily_weekdays' },
-        { label: '立位リーダーとのアライメント', frequency: 'daily_weekdays' },
-        { label: '臥位テーブルとのアライメント', frequency: 'daily_weekdays' },
-        { label: '可動絞りの動作確認', frequency: 'daily_weekdays' },
-        { label: '照射野ランプの点灯確認', frequency: 'daily_weekdays' },
-        { label: '立位・臥位撮影台の動作確認', frequency: 'daily_weekdays' },
-        { label: '立位・臥位パネルの起動確認', frequency: 'daily_weekdays' },
         {
-          label: '歯科用装置のテスト撮影(CBCTのみ)',
+          label: '動作確認 (移動・ブレーキ・照射野・レディ)',
           frequency: 'daily_weekdays',
         },
-        { label: '画質確認(CR)', frequency: 'daily_weekdays' },
-        { label: '実施者サイン', frequency: 'flexible' },
-        { label: '画質確認者サイン', frequency: 'flexible' },
+        {
+          label: '物品確認 (マーク・ビニール・メモ用紙)',
+          frequency: 'daily_weekdays',
+        },
       ],
     },
     {
-      category: ['終業点検'],
+      category: ['Mobile Art (3)'],
       items: [
-        { label: '撮影室の整理・整頓', frequency: 'daily_weekdays' },
-        { label: '撮影台・備品の清掃', frequency: 'daily_weekdays' },
         {
-          label: 'カセッテ(IP)の清掃',
+          label: '動作確認 (移動・ブレーキ・照射野・レディ)',
           frequency: 'daily_weekdays',
         },
-        { label: '補助具・備品の紛失 チェック', frequency: 'daily_weekdays' },
         {
-          label: 'CBCT申込書サインチェック(2か所) ※',
+          label: '物品確認 (マーク・ビニール・メモ用紙)',
           frequency: 'daily_weekdays',
         },
-        { label: '実施者サイン', frequency: 'flexible' },
       ],
     },
     {
-      category: ['月間点検', '週間点検'],
+      category: ['Mobillet (6)'],
       items: [
-        { label: '撮影室の清掃', frequency: 'last-WeekdayOfWeek' },
-        { label: '寝具・衣類の交換', frequency: 'last-WeekdayOfWeek' },
         {
-          label: 'コンソールモニター及び周辺の清掃',
-          frequency: 'last-WeekdayOfWeek',
+          label: '動作確認 (移動・ブレーキ・照射野・レディ)',
+          frequency: 'daily_weekdays',
         },
-        { label: '手洗い場の清掃', frequency: 'last-WeekdayOfWeek' },
         {
-          label: '手指消毒液③⑤⑥の残量確認 (月初) ※',
-          frequency: 'monthly_first',
+          label: '物品確認 (マーク・ビニール・メモ用紙)',
+          frequency: 'daily_weekdays',
         },
-        { label: '時計の時間合わせ (月末)', frequency: 'monthly_last' },
-        { label: 'CBCT検査申込書の整理 (月末)', frequency: 'monthly_last' },
+      ],
+    },
+    {
+      category: ['CALNEO Go (2)'],
+      items: [
+        {
+          label: '動作確認 (移動・ブレーキ・照射野・レディ)',
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: '物品確認 (マーク・ビニール・メモ用紙)',
+          frequency: 'daily_weekdays',
+        },
+      ],
+    },
+    {
+      category: ['CALNEO Go (4)'],
+      items: [
+        {
+          label: '動作確認 (移動・ブレーキ・照射野・レディ)',
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: '物品確認 (マーク・ビニール・メモ用紙)',
+          frequency: 'daily_weekdays',
+        },
+      ],
+    },
+    {
+      category: ['CALNEO Go (5)'],
+      items: [
+        {
+          label: '動作確認 (移動・ブレーキ・照射野・レディ)',
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: '物品確認 (マーク・ビニール・メモ用紙)',
+          frequency: 'daily_weekdays',
+        },
+      ],
+    },
+    {
+      category: [''],
+      items: [
         {
           label: '実施者サイン',
-          frequency: 'flexible',
+          frequency: 'daily_weekdays',
         },
       ],
     },
@@ -81,9 +113,9 @@ const inspectionData: DeviceInspection = {
   ],
 };
 
-const RemarksContents: string[] = [
-  '※ CBCT検査申込書(6ヶ月保管)ファイルに1ヵ月分の申込書を綴じ、6ヶ月を超えた申込書を廃棄してください。',
-  '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
+const RemarksContents = [
+  //   '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
+  '',
 ];
 
 // 最終改訂日:yyyy/MM/dd の形式で統一
@@ -108,12 +140,17 @@ const printChecklistHeight: number =
   printRemarksHeight -
   printFooterHeight;
 
-const checkItemLength: number =
-  inspectionData.inspections[0].items.length +
-  inspectionData.inspections[1].items.length +
-  inspectionData.inspections[2].items.length;
+const getCheckItemLength = (inspections: InspectionCategory[]) => {
+  let itemCount: number = 0;
+  inspections.forEach((section) => (itemCount += section.items.length));
+  return itemCount;
+};
+const checkItemLength: number = getCheckItemLength(inspectionData.inspections);
+// console.log(checkItemLength);
 
-const checkItemHight: number = printChecklistHeight / checkItemLength;
+// checkItemLengthが今回は2倍(始業点検分・終業点検分)があるため、掛ける2をしている
+const checkItemHight: number = printChecklistHeight / (checkItemLength * 2);
+
 // const checkItemHight: string = `calc((${printHeight.replace(
 //   /^calc\((.*)\)$/,
 //   '$1'
@@ -131,7 +168,7 @@ const checkItemHight: number = printChecklistHeight / checkItemLength;
 // console.log('備考', printRemarksHeight);
 // console.log('フッター', printFooterHeight);
 
-type XrayRoom13Props = {
+type Portable51A_DailyInspectionProps = {
   formatDate: (year: number, month: number, date: number) => string;
   totalHolidays: string[];
   displayRoom: string;
@@ -150,7 +187,7 @@ type XrayRoom13Props = {
   };
 };
 
-const XrayRoom13: FC<XrayRoom13Props> = ({
+const Portable51A_DailyInspection: FC<Portable51A_DailyInspectionProps> = ({
   formatDate,
   totalHolidays,
   displayRoom,
@@ -206,19 +243,71 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
                 daysInMonth={daysInMonth}
                 dailyChecklistYear={dailyChecklistYear}
                 dailyChecklistMonth={dailyChecklistMonth}
+                itemsHeaderColSpan={3}
                 getDayInfo={getDayInfo}
               />
               <TableBody>
-                {/* 日常点検項目欄 */}
+                {/* 日常点検項目欄 今回は2つ(始業点検用・終業点検用)*/}
+                {/* ①始業点検 */}
+                <TableRow>
+                  <StyledTableCell
+                    rowSpan={checkItemLength + 1}
+                    sx={{
+                      writingMode: 'vertical-rl',
+                      textOrientation: 'upright',
+                      fontWeight: 'bold',
+                      backgroundColor: '#f0f0f0',
+                      border: '3px solid black',
+                      width: '45px',
+                    }}
+                  >
+                    <Typography sx={{ fontWeight: '700' }}>始業点検</Typography>
+                  </StyledTableCell>
+                </TableRow>
                 <DailyCheckListItems
                   formatDate={formatDate}
                   totalHolidays={totalHolidays}
                   inspectionData={inspectionData}
                   StyledTableCell={StyledTableCell}
                   checkItemHight={checkItemHight}
+                  categoryCellWitingMode={'horizontal-tb'}
+                  categoryCellWidthPx={'100px'}
+                  allCheckCellsWidthPx={700}
+                  checkItemFontSize={'10px'}
+                  daysInMonth={daysInMonth}
                   dailyChecklistYear={dailyChecklistYear}
                   dailyChecklistMonth={dailyChecklistMonth}
+                  getDayInfo={getDayInfo}
+                />
+                {/* ②終業点検 */}
+                <TableRow>
+                  <StyledTableCell
+                    rowSpan={checkItemLength + 1}
+                    sx={{
+                      writingMode: 'vertical-rl',
+                      textOrientation: 'upright',
+                      fontWeight: 'bold',
+                      backgroundColor: '#f0f0f0',
+                      border: '3px solid black',
+                      width: '45px',
+                    }}
+                  >
+                    <Typography sx={{ fontWeight: '700' }}>終業点検</Typography>
+                  </StyledTableCell>
+                </TableRow>
+                <DailyCheckListItems
+                  formatDate={formatDate}
+                  totalHolidays={totalHolidays}
+                  inspectionData={inspectionData}
+                  StyledTableCell={StyledTableCell}
+                  checkItemHight={checkItemHight}
+                  categoryCellWitingMode={'horizontal-tb'}
+                  categoryCellWidthPx={'100px'}
+                  allCheckCellsWidthPx={700}
+                  checkItemFontSize={'10px'}
                   daysInMonth={daysInMonth}
+                  dailyChecklistYear={dailyChecklistYear}
+                  dailyChecklistMonth={dailyChecklistMonth}
                   getDayInfo={getDayInfo}
                 />
                 {/* ======================================================================= */}
@@ -243,4 +332,4 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
   );
 };
 
-export default XrayRoom13;
+export default Portable51A_DailyInspection;

@@ -6,26 +6,45 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Stack, Typography } from '@mui/material';
 
-type YearMonthButtonProps = {
-  displayRoom: string;
-  setDisplayRoom: React.Dispatch<React.SetStateAction<string>>;
+type YearMonthRoomButtonProps = {
   dailyChecklistYear: number;
   setDailyChecklistYear: React.Dispatch<React.SetStateAction<number>>;
   dailyChecklistMonth: number;
   setDailyChecklistMonth: React.Dispatch<React.SetStateAction<number>>;
+  displayRoom: string;
+  setDisplayRoom: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const DailyCheckYearMonthButton: React.FC<YearMonthButtonProps> = ({
-  displayRoom,
-  setDisplayRoom,
+const DailyCheckYearMonthRoomButton: React.FC<YearMonthRoomButtonProps> = ({
   dailyChecklistYear,
   setDailyChecklistYear,
   dailyChecklistMonth,
   setDailyChecklistMonth,
+  displayRoom,
+  setDisplayRoom,
 }) => {
   const yearList = [2025, 2026, 2027, 2028, 2029, 2030];
   const monthList = Array.from({ length: 12 }, (_, i) => Number(i + 1));
-  const roomList = ['13番撮影室', '15番撮影室'];
+  const roomList = [
+    '13番撮影室',
+    '15番撮影室',
+    '16番撮影室',
+    '17番撮影室',
+    '19番撮影室',
+    '操作廊下 (51A)',
+    'IP室 (12番撮影室)',
+    'マンモグラフィー室 (予防医学センター)',
+    'マンモグラフィー室 (6番撮影室)',
+    'ポータブル装置 (51A) - 日常点検',
+    'ポータブル装置 (51A) - 画質点検',
+    '救急外来撮影室',
+    'ポータブル装置 (ER)',
+    '救急外来撮影室物品',
+    '骨密度検査室',
+    'ポータブル装置 (手術室)',
+    'ポータブル装置 (ICU)',
+    'ポータブル装置 充電確認 (手術室・ICU)',
+  ];
 
   const handleYearChange = (event: SelectChangeEvent) => {
     setDailyChecklistYear(Number(event.target.value));
@@ -121,4 +140,4 @@ const DailyCheckYearMonthButton: React.FC<YearMonthButtonProps> = ({
   );
 };
 
-export default DailyCheckYearMonthButton;
+export default DailyCheckYearMonthRoomButton;

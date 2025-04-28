@@ -1,12 +1,17 @@
 export interface InspectionItem {
-  label: string;
+  label: string | string[];
   frequency:
+    | 'every-day'
     | 'daily_weekdays'
     | 'first-WeekdayOfWeek'
     | 'last-WeekdayOfWeek'
     | 'every-Wednesday'
+    | 'every-Thursday'
+    | 'daily_Holidays'
     | 'monthly_first'
     | 'monthly_last'
+    | 'quarterly'
+    | 'feb_and_aug'
     | 'flexible';
 }
 
@@ -16,7 +21,7 @@ export interface InspectionCategory {
 }
 
 export interface DeviceInspection {
-  deviceId: string;
-  deviceName: string;
+  deviceId?: string;
+  deviceName?: string;
   inspections: InspectionCategory[];
 }

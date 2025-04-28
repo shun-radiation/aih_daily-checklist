@@ -1,15 +1,15 @@
-import { Table, TableBody, TableContainer, Paper, Box } from '@mui/material';
-import DailyCheckHeader from '../../Organisms/DailyCheck/DailyCheckHeader';
-import DailyCheckFooter from '../../Organisms/DailyCheck/DailyCheckFooter';
-import DailyCheckRemarks from '../../Organisms/DailyCheck/DailyCheckRemarks';
-import DailyCheckListItems from '../../Organisms/DailyCheck/DailyCheckListItems';
-import { DeviceInspection } from '../../types/types';
-import DailyCheckDateRow from '../../Organisms/DailyCheck/DailyCheckDateRow';
 import { FC } from 'react';
+import { Table, TableBody, TableContainer, Paper, Box } from '@mui/material';
+import { DeviceInspection } from '../../types/types';
+import DailyCheckHeader from '../../Organisms/DailyCheck/DailyCheckHeader';
+import DailyCheckDateRow from '../../Organisms/DailyCheck/DailyCheckDateRow';
+import DailyCheckListItems from '../../Organisms/DailyCheck/DailyCheckListItems';
+import DailyCheckRemarks from '../../Organisms/DailyCheck/DailyCheckRemarks';
+import DailyCheckFooter from '../../Organisms/DailyCheck/DailyCheckFooter';
 
 const inspectionData: DeviceInspection = {
   deviceId: '15-room',
-  deviceName: '15撮影室',
+  deviceName: '15番撮影室',
   inspections: [
     {
       category: ['始業点検'],
@@ -25,7 +25,7 @@ const inspectionData: DeviceInspection = {
         { label: '照射野ランプの点灯確認', frequency: 'daily_weekdays' },
         { label: '立位・臥位撮影台の動作確認', frequency: 'daily_weekdays' },
         { label: '立位・臥位パネルの起動確認', frequency: 'daily_weekdays' },
-        { label: '画質確認', frequency: 'daily_weekdays' },
+        { label: '画質確認(CR)', frequency: 'daily_weekdays' },
         { label: '実施者サイン', frequency: 'flexible' },
         { label: '画質確認者サイン', frequency: 'flexible' },
       ],
@@ -36,7 +36,7 @@ const inspectionData: DeviceInspection = {
         { label: '撮影室の整理・整頓', frequency: 'daily_weekdays' },
         { label: '撮影台・備品の清掃', frequency: 'daily_weekdays' },
         {
-          label: 'カセッテの清掃(長尺カセッテも含む)',
+          label: 'カセッテ(IP)の清掃',
           frequency: 'daily_weekdays',
         },
         { label: '補助具・備品の紛失 チェック', frequency: 'daily_weekdays' },
@@ -120,6 +120,9 @@ const checkItemHight: number = printChecklistHeight / checkItemLength;
 // console.log('フッター', printFooterHeight);
 
 type XrayRoom15Props = {
+  formatDate: (year: number, month: number, date: number) => string;
+  totalHolidays: string[];
+  displayRoom: string;
   dailyChecklistYear: number;
   dailyChecklistMonth: number;
   StyledTableCell: React.ElementType;
@@ -136,6 +139,9 @@ type XrayRoom15Props = {
 };
 
 const XrayRoom15: FC<XrayRoom15Props> = ({
+  formatDate,
+  totalHolidays,
+  displayRoom,
   dailyChecklistYear,
   dailyChecklistMonth,
   StyledTableCell,
@@ -172,8 +178,8 @@ const XrayRoom15: FC<XrayRoom15Props> = ({
         >
           {/* ヘッダー */}
           <DailyCheckHeader
+            displayRoom={displayRoom}
             printHeaderHeight={printHeaderHeight}
-            inspectionData={inspectionData}
             dailyChecklistYear={dailyChecklistYear}
             dailyChecklistMonth={dailyChecklistMonth}
           />
@@ -181,6 +187,8 @@ const XrayRoom15: FC<XrayRoom15Props> = ({
             <Table size='small'>
               {/* 日にち */}
               <DailyCheckDateRow
+                formatDate={formatDate}
+                totalHolidays={totalHolidays}
                 StyledTableCell={StyledTableCell}
                 printDateHeight={printDateHeight}
                 daysInMonth={daysInMonth}
@@ -191,6 +199,8 @@ const XrayRoom15: FC<XrayRoom15Props> = ({
               <TableBody>
                 {/* 日常点検項目欄 */}
                 <DailyCheckListItems
+                  formatDate={formatDate}
+                  totalHolidays={totalHolidays}
                   inspectionData={inspectionData}
                   StyledTableCell={StyledTableCell}
                   checkItemHight={checkItemHight}

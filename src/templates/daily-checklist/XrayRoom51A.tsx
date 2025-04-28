@@ -8,70 +8,127 @@ import DailyCheckRemarks from '../../Organisms/DailyCheck/DailyCheckRemarks';
 import DailyCheckFooter from '../../Organisms/DailyCheck/DailyCheckFooter';
 
 const inspectionData: DeviceInspection = {
-  // deviceId: '13-room',
-  // deviceName: '13番撮影室',
+  //   deviceId: '51A-room',
+  //   deviceName: '操作廊下 (51A)',
   inspections: [
     {
       category: ['始業点検'],
       items: [
-        { label: '電源投入後、表示灯の確認', frequency: 'daily_weekdays' },
-        { label: '歯科撮影用装置の電源投入', frequency: 'daily_weekdays' },
-        { label: '異音・異臭の有無', frequency: 'daily_weekdays' },
-        { label: '1管球エージング (90-140kV)', frequency: 'daily_weekdays' },
-        { label: '2管球エージング (70-100kV)', frequency: 'daily_weekdays' },
-        { label: 'X線管保持装置の動作確認', frequency: 'daily_weekdays' },
-        { label: '立位リーダーとのアライメント', frequency: 'daily_weekdays' },
-        { label: '臥位テーブルとのアライメント', frequency: 'daily_weekdays' },
-        { label: '可動絞りの動作確認', frequency: 'daily_weekdays' },
-        { label: '照射野ランプの点灯確認', frequency: 'daily_weekdays' },
-        { label: '立位・臥位撮影台の動作確認', frequency: 'daily_weekdays' },
-        { label: '立位・臥位パネルの起動確認', frequency: 'daily_weekdays' },
         {
-          label: '歯科用装置のテスト撮影(CBCTのみ)',
+          label: 'Po処理用機器の再起動 (コンソール・読取装置)',
           frequency: 'daily_weekdays',
         },
-        { label: '画質確認(CR)', frequency: 'daily_weekdays' },
+        { label: '医療廃棄物の確認 (8割で廃棄)', frequency: 'daily_weekdays' },
+        {
+          label: '待合廊下の窓開け (10cm程度ずつ)',
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: 'IP検査前アラーム設定 (iPhoneの有無確認)',
+          frequency: 'daily_weekdays',
+        },
+        { label: 'ICU・OP室 再起動マグネット', frequency: 'daily_weekdays' },
         { label: '実施者サイン', frequency: 'flexible' },
-        { label: '画質確認者サイン', frequency: 'flexible' },
+        {
+          label: 'QA station : データの削除 (QA1・QA2)',
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: 'QA station : 再起動 (QA1・QA2)',
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: 'QA station : RadiCS (モニターパターンチェック)',
+          frequency: 'daily_weekdays',
+        },
+        { label: '実施者サイン', frequency: 'flexible' },
+        {
+          label: 'T-SUB ワークステーション : システム終了',
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: 'T-SUB ワークステーション : PCの再起動',
+          frequency: 'daily_weekdays',
+        },
+        { label: '実施者サイン', frequency: 'flexible' },
+        { label: 'VINCENT 1 (右側) 再起動', frequency: 'daily_weekdays' },
+        { label: 'VINCENT 6 (左側) 再起動', frequency: 'daily_weekdays' },
+        { label: '実施者サイン', frequency: 'flexible' },
+        { label: 'RIS監視用モニター', frequency: 'daily_weekdays' },
+        { label: '実施者サイン', frequency: 'flexible' },
+        {
+          label: ['画質確認 (QA2) \u00A0\u00A0 ER撮影装置', '確認者サイン'],
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: ['画質確認 (QA2) \u00A0\u00A0 ER透視装置', '確認者サイン'],
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: [
+            '画質確認 (QA2) \u00A0\u00A0 ER (CALNEO Go ㉜)',
+            '確認者サイン',
+          ],
+          frequency: 'first-WeekdayOfWeek',
+        },
+        {
+          label: [
+            '画質確認 (synapse) \u00A0\u00A0 OP室 (Mobile DaRt ㉛) ',
+            '確認者サイン',
+          ],
+          frequency: 'first-WeekdayOfWeek',
+        },
+        {
+          label: [
+            '画質確認 (synapse) \u00A0\u00A0 ICU (CALNEO Go ㉚',
+            '確認者サイン',
+          ],
+          frequency: 'first-WeekdayOfWeek',
+        },
       ],
     },
     {
       category: ['終業点検'],
       items: [
-        { label: '撮影室の整理・整頓', frequency: 'daily_weekdays' },
-        { label: '撮影台・備品の清掃', frequency: 'daily_weekdays' },
+        { label: 'Po用カセッテの清掃 (11時以降)', frequency: 'daily_weekdays' },
         {
-          label: 'カセッテ(IP)の清掃',
+          label: 'Po用カセッテの清掃 (業務終了前)',
           frequency: 'daily_weekdays',
         },
-        { label: '補助具・備品の紛失 チェック', frequency: 'daily_weekdays' },
         {
-          label: 'CBCT申込書サインチェック(2か所) ※',
+          label: 'ポータブル装置の電源プラグ接続確認',
           frequency: 'daily_weekdays',
         },
+        {
+          label: 'Epicondylar view 計測 (翌日分)',
+          frequency: 'daily_weekdays',
+        },
+        {
+          label: '待合廊下の椅子・手すり・ドアノブの清掃',
+          frequency: 'daily_weekdays',
+        },
+        { label: '待合廊下の窓閉め', frequency: 'daily_weekdays' },
         { label: '実施者サイン', frequency: 'flexible' },
       ],
     },
     {
       category: ['月間点検', '週間点検'],
       items: [
-        { label: '撮影室の清掃', frequency: 'last-WeekdayOfWeek' },
-        { label: '寝具・衣類の交換', frequency: 'last-WeekdayOfWeek' },
         {
-          label: 'コンソールモニター及び周辺の清掃',
+          label: '仕上げ室周辺のモニター等の清掃 (週末)',
           frequency: 'last-WeekdayOfWeek',
         },
-        { label: '手洗い場の清掃', frequency: 'last-WeekdayOfWeek' },
         {
-          label: '手指消毒液③⑤⑥の残量確認 (月初) ※',
-          frequency: 'monthly_first',
+          label: 'OP室DRYPIX フィルム枚数確認 (月末)',
+          frequency: 'monthly_last',
         },
+        { label: '不明書物の整理・廃棄 (月末)', frequency: 'monthly_last' },
         { label: '時計の時間合わせ (月末)', frequency: 'monthly_last' },
-        { label: 'CBCT検査申込書の整理 (月末)', frequency: 'monthly_last' },
         {
-          label: '実施者サイン',
-          frequency: 'flexible',
+          label: 'プロテクターの定期点検 (2,8月の最終週)',
+          frequency: 'feb_and_aug',
         },
+        { label: '実施者サイン', frequency: 'flexible' },
       ],
     },
     // {
@@ -81,8 +138,7 @@ const inspectionData: DeviceInspection = {
   ],
 };
 
-const RemarksContents: string[] = [
-  '※ CBCT検査申込書(6ヶ月保管)ファイルに1ヵ月分の申込書を綴じ、6ヶ月を超えた申込書を廃棄してください。',
+const RemarksContents = [
   '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
 ];
 
@@ -131,7 +187,7 @@ const checkItemHight: number = printChecklistHeight / checkItemLength;
 // console.log('備考', printRemarksHeight);
 // console.log('フッター', printFooterHeight);
 
-type XrayRoom13Props = {
+type XrayRoom51AProps = {
   formatDate: (year: number, month: number, date: number) => string;
   totalHolidays: string[];
   displayRoom: string;
@@ -150,7 +206,7 @@ type XrayRoom13Props = {
   };
 };
 
-const XrayRoom13: FC<XrayRoom13Props> = ({
+const XrayRoom51A: FC<XrayRoom51AProps> = ({
   formatDate,
   totalHolidays,
   displayRoom,
@@ -216,9 +272,11 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
                   inspectionData={inspectionData}
                   StyledTableCell={StyledTableCell}
                   checkItemHight={checkItemHight}
+                  allCheckCellsWidthPx={750}
+                  checkItemFontSize={'10px'}
+                  daysInMonth={daysInMonth}
                   dailyChecklistYear={dailyChecklistYear}
                   dailyChecklistMonth={dailyChecklistMonth}
-                  daysInMonth={daysInMonth}
                   getDayInfo={getDayInfo}
                 />
                 {/* ======================================================================= */}
@@ -243,4 +301,4 @@ const XrayRoom13: FC<XrayRoom13Props> = ({
   );
 };
 
-export default XrayRoom13;
+export default XrayRoom51A;

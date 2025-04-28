@@ -25,6 +25,7 @@ const DailyCheckRemarks: FC<RemarksProps> = ({
             backgroundColor: '#f0f0f0',
             border: '3px solid black',
             height: `${printRemarksHeight}mm`,
+            // height: '90px',
           }}
         >
           <Typography sx={{ fontWeight: '700' }}>備考</Typography>
@@ -55,7 +56,7 @@ const DailyCheckRemarks: FC<RemarksProps> = ({
             {RemarksContents.map((remarksContent, index) => (
               <Typography
                 key={index}
-                sx={{ fontWeight: '400', fontSize: '9px' }}
+                sx={{ fontWeight: '500', fontSize: '9px' }}
               >
                 {remarksContent}
               </Typography>
