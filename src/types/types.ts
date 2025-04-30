@@ -3,6 +3,7 @@ export interface InspectionItem {
   frequency:
     | 'every-day'
     | 'daily_weekdays'
+    | 'daily_nextdayOfWeekdays'
     | 'first-WeekdayOfWeek'
     | 'last-WeekdayOfWeek'
     | 'every-Wednesday'

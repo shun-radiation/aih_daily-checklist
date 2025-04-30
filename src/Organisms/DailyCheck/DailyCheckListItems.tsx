@@ -338,7 +338,7 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
                   // item.labelが配列である場合
                   <Typography
                     sx={{
-                      fontWeight: '500',
+                      fontWeight: '400',
                       fontSize: checkItemFontSize,
                       display: 'flex',
                       justifyContent: 'space-between',
@@ -354,7 +354,7 @@ const DailyCheckListItems: FC<ListItemsProps> = ({
                   // item.labelが配列ではない場合
                   <Typography
                     sx={{
-                      fontWeight: '500',
+                      fontWeight: '400',
                       fontSize: checkItemFontSize,
                     }}
                   >

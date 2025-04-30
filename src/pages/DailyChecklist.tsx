@@ -29,23 +29,24 @@ const DailyChecklist = () => {
     React.useState<number>(2025);
   const [dailyChecklistMonth, setDailyChecklistMonth] =
     React.useState<number>(1);
-  const [displayRoom, setDisplayRoom] = useState<string>(
-    'ポータブル装置 充電確認 (手術室・ICU)'
-  );
+  const [displayRoom, setDisplayRoom] = useState<string>('13番撮影室');
 
   const formatDate = (year: number, month: number, date: number) => {
-    return `${year}-${String(month).padStart(2, '0')}-${String(date).padStart(
+    const format = new Date(year, month - 1, date);
+    return `${format.getFullYear()}-${String(format.getMonth() + 1).padStart(
       2,
       '0'
-    )}`;
+    )}-${String(format.getDate()).padStart(2, '0')}`;
   };
 
   // 病院独自の休日を指定
   const getCustomHolidays = (year: number): string[] => {
     const customHolidays = [
-      { date: formatDate(year, 1, 2), name: '病院の休日？？' },
-      { date: formatDate(year, 1, 3), name: '病院の休日？？' },
-      { date: formatDate(year, 12, 29), name: '病院の休日？？' },
+      { date: formatDate(year - 1, 12, 31), name: '病院の休日？?？?' },
+      // ↑↑↑ PortableChargeCheckSpecial.tsxで、朝礼確認の欄の1月1日を黒塗り適応するために必要。
+      { date: formatDate(year, 1, 2), name: '病院の休日？？?' },
+      { date: formatDate(year, 1, 3), name: '病院の休日？？?' },
+      { date: formatDate(year, 12, 29), name: '病院の休日？？?' },
       { date: formatDate(year, 12, 30), name: '病院の休日？?？' },
       { date: formatDate(year, 12, 31), name: '病院の休日？?？?' },
     ];
@@ -54,15 +55,33 @@ const DailyChecklist = () => {
   // console.log(getCustomHolidays(dailyChecklistYear));
 
   // 日本の祝日を取得
-  interface Holiday {
+  type Holiday = {
     month: number;
     date: number;
     name: string;
-  }
+  };
+  // エラー解消方法が不明、試行錯誤済み
+  // エラー解消か。
+  // getHolidaysOf(year)では、{ date: Date; name: string }[]を渡しているつもりだが、
+  // 実際は、{month: number;date: number;name: string;}[]がきている...
+  // 下のように、無理やり解消。型アサーション使用。
   const getJapaneseHolidays = (year: number): string[] => {
-    // エラー解消方法が不明、試行錯誤済み
-    const holidays: Holiday[] = getHolidaysOf(year); // 型を合わせる
+    const holidaysRow = getHolidaysOf(year) as {
+      month?: Date;
+      date: Date;
+      name: string;
+    }[];
+    // console.log(holidaysRow);
+    const holidays: Holiday[] = holidaysRow.map((holiday) => {
+      return {
+        month: Number(holiday.month),
+        date: Number(holiday.date),
+        name: holiday.name,
+      };
+    });
     // console.log(holidays);
+
+    // const holidays = getHolidaysOf(year); // 型を合わせる
     const japaneseHolidays = holidays.map((holiday) => {
       return formatDate(year, holiday.month, holiday.date);
       //   const month = holiday.month.toString().padStart(2, '0');
@@ -78,7 +97,7 @@ const DailyChecklist = () => {
     ...getCustomHolidays(dailyChecklistYear),
     ...getJapaneseHolidays(dailyChecklistYear),
   ];
-  //   console.log(totalHolidays);
+  // console.log(totalHolidays);
 
   const StyledTableCell = styled(TableCell)(() => ({
     border: '1px solid black',
@@ -353,18 +372,28 @@ const DailyChecklist = () => {
   return (
     <>
       <Box>
-        <DailyCheckYearMonthRoomButton
-          displayRoom={displayRoom}
-          setDisplayRoom={setDisplayRoom}
-          dailyChecklistYear={dailyChecklistYear}
-          setDailyChecklistYear={setDailyChecklistYear}
-          dailyChecklistMonth={dailyChecklistMonth}
-          setDailyChecklistMonth={setDailyChecklistMonth}
-        />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            mx: 'auto',
+            width: '297mm',
+          }}
+        >
+          <DailyCheckYearMonthRoomButton
+            displayRoom={displayRoom}
+            setDisplayRoom={setDisplayRoom}
+            dailyChecklistYear={dailyChecklistYear}
+            setDailyChecklistYear={setDailyChecklistYear}
+            dailyChecklistMonth={dailyChecklistMonth}
+            setDailyChecklistMonth={setDailyChecklistMonth}
+          />
+          <DailyCheckPrintButton />
+        </Box>
 
         {renderDisplayRoom()}
 
-        <DailyCheckPrintButton />
         {/* <Outlet /> */}
 
         {/* <Link to='XrayRoom13' className='no-print'>

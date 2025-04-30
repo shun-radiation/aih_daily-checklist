@@ -15,10 +15,12 @@ const DailyCheckPrintButton = () => {
       onClick={() => window.print()}
       className='no-print'
       sx={{
-        mt: '20px',
+        // mt: '20px',
+        // mb: '40px',
         display: 'flex',
-        width: '40%',
-        mx: 'auto',
+        height: '70px',
+        width: '25%',
+        // mx: 'auto',
         p: 2,
       }}
     >

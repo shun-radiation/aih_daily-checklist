@@ -59,6 +59,15 @@ const DailyCheckListItemsSpecialAll: FC<DailyCheckListItemsSpecialAllProps> = ({
     }
   };
 
+  // 指定日が平日の翌日であるかどうかを判定、return で true or false を返す。
+  const judgeNextdayOfWeekdays = (year: number, month: number, day: number) => {
+    if (judgeWeekdays(year, month, day - 1)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   // 指定日が土日かどうかを判定、return で true or false を返す。
   const judgeHolidays = (year: number, month: number, day: number) => {
     return !judgeWeekdays(year, month, day);
@@ -274,6 +283,12 @@ const DailyCheckListItemsSpecialAll: FC<DailyCheckListItemsSpecialAllProps> = ({
         return true;
       case 'daily_weekdays':
         return judgeWeekdays(dailyChecklistYear, dailyChecklistMonth, day);
+      case 'daily_nextdayOfWeekdays':
+        return judgeNextdayOfWeekdays(
+          dailyChecklistYear,
+          dailyChecklistMonth,
+          day
+        );
       case 'daily_Holidays':
         return judgeHolidays(dailyChecklistYear, dailyChecklistMonth, day);
       case 'first-WeekdayOfWeek':
@@ -356,6 +371,7 @@ const DailyCheckListItemsSpecialAll: FC<DailyCheckListItemsSpecialAllProps> = ({
                   textAlign: !labelTextAlign
                     ? // デフォルトの配置
                       item.label !== '実施者サイン' &&
+                      item.label !== '確認者サイン' &&
                       item.label !== '画質確認者サイン'
                       ? 'left'
                       : 'right'
@@ -368,7 +384,7 @@ const DailyCheckListItemsSpecialAll: FC<DailyCheckListItemsSpecialAllProps> = ({
                   // item.labelが配列である場合
                   <Typography
                     sx={{
-                      fontWeight: '500',
+                      fontWeight: '400',
                       fontSize: checkItemFontSize,
                       display: 'flex',
                       justifyContent: 'space-between',
@@ -384,7 +400,7 @@ const DailyCheckListItemsSpecialAll: FC<DailyCheckListItemsSpecialAllProps> = ({
                   // item.labelが配列ではない場合
                   <Typography
                     sx={{
-                      fontWeight: '500',
+                      fontWeight: '400',
                       fontSize: checkItemFontSize,
                     }}
                   >

@@ -167,7 +167,7 @@ const XrayRoom17: FC<XrayRoom17Props> = ({
         sx={{
           mx: 'auto',
           height: `${printHeightMM}mm`,
-          // width: `${printWidthMM}mm`,
+          width: `${printWidthMM}mm`,
           // maxHeight: `${printHeightMM}mm`,
           // maxWidth: `${printWidthMM}mm`,
           display: 'flex',

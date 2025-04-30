@@ -22,8 +22,8 @@ const inspectionDataOfNightShift: DeviceInspection = {
     {
       category: ['OP室', '(7時半~)'],
       items: [
-        { label: '① コンセント', frequency: 'every-day' },
-        { label: '② インジケータ', frequency: 'every-day' },
+        { label: '① コンセント接続確認', frequency: 'every-day' },
+        { label: '② インジケータ確認', frequency: 'every-day' },
         { label: '実施時間', frequency: 'every-day' },
         { label: '実施者サイン', frequency: 'flexible' },
       ],
@@ -31,8 +31,8 @@ const inspectionDataOfNightShift: DeviceInspection = {
     {
       category: ['ICU', '(7時半~)'],
       items: [
-        { label: '① コンセント', frequency: 'every-day' },
-        { label: '② インジケータ', frequency: 'every-day' },
+        { label: '① コンセント接続確認', frequency: 'every-day' },
+        { label: '② インジケータ確認', frequency: 'every-day' },
         { label: '実施時間', frequency: 'every-day' },
         { label: '実施者サイン', frequency: 'flexible' },
       ],
@@ -42,7 +42,7 @@ const inspectionDataOfNightShift: DeviceInspection = {
       items: [
         {
           label: '夜勤者全員確認',
-          frequency: 'daily_weekdays',
+          frequency: 'daily_nextdayOfWeekdays',
         },
         {
           label: '夜勤リーダーサイン',
@@ -73,7 +73,7 @@ const inspectionDataOfWeekdayShift: DeviceInspection = {
       category: ['平日日勤者 (撮影部門)'],
       items: [
         {
-          label: '確認サイン',
+          label: '確認者サイン',
           frequency: 'daily_weekdays',
         },
       ],
@@ -87,8 +87,8 @@ const inspectionDataOfHolidayShift: DeviceInspection = {
     {
       category: ['OP室'],
       items: [
-        { label: '① コンセント', frequency: 'daily_Holidays' },
-        { label: '② インジケータ', frequency: 'daily_Holidays' },
+        { label: '① コンセント接続確認', frequency: 'daily_Holidays' },
+        { label: '② インジケータ確認', frequency: 'daily_Holidays' },
         { label: '実施時間', frequency: 'daily_Holidays' },
         { label: '実施者サイン', frequency: 'flexible' },
       ],
@@ -96,8 +96,8 @@ const inspectionDataOfHolidayShift: DeviceInspection = {
     {
       category: ['ICU'],
       items: [
-        { label: '① コンセント', frequency: 'daily_Holidays' },
-        { label: '② インジケータ', frequency: 'daily_Holidays' },
+        { label: '① コンセント接続確認', frequency: 'daily_Holidays' },
+        { label: '② インジケータ確認', frequency: 'daily_Holidays' },
         { label: '実施時間', frequency: 'daily_Holidays' },
         { label: '実施者サイン', frequency: 'flexible' },
       ],
@@ -113,12 +113,13 @@ const inspectionDataOfHolidayShift: DeviceInspection = {
 };
 
 const RemarksContents = [
-  //   '※ 手指消毒液の残量・使用本数は感染管理委員会のExcelファイルに記入。',
-  '',
+  'OP室・ICUのポータブル装置の充電忘れ防止のため、各装置が充電されていることを確認する。',
+  '【夜勤者・休日日勤者】：業務終了時までに保守点検を実施し、次の勤務者へ口頭で引き継ぐ。(夜勤者：OP室は7時半以降に行くこと)。',
+  '【平日日勤者】：始業時に夜勤者の記載を確認し、未実施の際は夜勤者に依頼する。(担当：撮影部門)',
 ];
 
 // 最終改訂日:yyyy/MM/dd の形式で統一
-const finalRevision: string = '2025/01/01';
+const finalRevision: string = '2025/05/01';
 
 // maxWidth: '297mm',
 // maxHeight: '210mm',
@@ -206,7 +207,7 @@ const PortableChargeCheckSpecial: FC<PortableChargeCheckSpecialProps> = ({
         sx={{
           mx: 'auto',
           height: `${printHeightMM}mm`,
-          // width: `${printWidthMM}mm`,
+          width: `${printWidthMM}mm`,
           // maxHeight: `${printHeightMM}mm`,
           // maxWidth: `${printWidthMM}mm`,
           display: 'flex',

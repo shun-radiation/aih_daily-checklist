@@ -66,12 +66,31 @@ const DailyCheckHeader: React.FC<DailyCheckHeaderProps> = ({
               {displayRoom}
             </Typography>
           </Box>
-          <Typography
-            sx={{ fontWeight: '500', fontSize: '25px' }}
-          >{`${dailyChecklistYear}年${dailyChecklistMonth}月`}</Typography>
+
           <Typography sx={{ fontWeight: '500', fontSize: '25px' }}>
-            aaa病院 aaaaaaaa
+            {`${dailyChecklistYear}年${dailyChecklistMonth}月`}
           </Typography>
+
+          <Box
+            sx={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}
+          >
+            <Typography
+              sx={{
+                fontWeight: '500',
+                fontSize: '20px',
+              }}
+            >
+              飯塚病院
+            </Typography>
+            <Typography
+              sx={{
+                fontWeight: '500',
+                fontSize: '20px',
+              }}
+            >
+              中央放射線部
+            </Typography>
+          </Box>
         </Grid>
       </Box>
       <Box

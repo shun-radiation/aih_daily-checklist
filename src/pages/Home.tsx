@@ -1,5 +1,11 @@
+import DrawerOfHomepage from '../templates/layout/Drawer';
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <DrawerOfHomepage />
+    </>
+  );
 };
 
 export default Home;

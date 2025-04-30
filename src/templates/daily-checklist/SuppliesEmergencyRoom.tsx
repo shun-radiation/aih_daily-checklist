@@ -70,7 +70,7 @@ const RemarksContents = [
 ];
 
 // 最終改訂日:yyyy/MM/dd の形式で統一
-const finalRevision: string = '2025/01/01';
+const finalRevision: string = '2025/05/01';
 
 // maxWidth: '297mm',
 // maxHeight: '210mm',
@@ -149,7 +149,7 @@ const SuppliesEmergencyRoom: FC<SuppliesEmergencyRoomProps> = ({
         sx={{
           mx: 'auto',
           height: `${printHeightMM}mm`,
-          // width: `${printWidthMM}mm`,
+          width: `${printWidthMM}mm`,
           // maxHeight: `${printHeightMM}mm`,
           // maxWidth: `${printWidthMM}mm`,
           display: 'flex',

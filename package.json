@@ -19,6 +19,7 @@
     "@mui/x-data-grid-generator": "^8.0.0",
     "@types/japanese-holidays": "^1.0.3",
     "date-fns": "^4.1.0",
+    "firebase": "^11.6.1",
     "japanese-holidays": "^1.0.10",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

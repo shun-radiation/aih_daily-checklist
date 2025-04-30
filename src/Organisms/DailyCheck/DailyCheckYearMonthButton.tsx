@@ -64,15 +64,16 @@ const DailyCheckYearMonthRoomButton: React.FC<YearMonthRoomButtonProps> = ({
       className='no-print'
       style={{
         height: '50px',
-        width: '100%',
-        margin: '50px auto',
+        // width: '100%',
+        marginTop: '50px',
+        marginBottom: '50px',
       }}
     >
       <Stack
         direction='row'
         spacing={2}
         sx={{
-          width: '100%',
+          // width: '100%',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
